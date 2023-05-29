@@ -9,7 +9,7 @@ int main(void)
     DDRA |= 0b00001111;
     // Insert code
     int i;
-    int n = 266;
+    int n = 264;
     for(i = 0; i<n; i++)
     {
         PORTA = 0b00110011;
