@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1685360080 source:c:\users\lise hondeveld\documents\code blok 4\gittest\fuse.c
+	<avr/io.h>
+
+1685364091 source:c:\users\lise hondeveld\documents\code blok 4\gittest\main.c
+	<avr/io.h>
+	<util/delay.h>
+
