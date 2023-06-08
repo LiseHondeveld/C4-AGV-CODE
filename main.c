@@ -2,82 +2,97 @@
  */
 
 #include <avr/io.h>
+#include <util/delay.h>
 
-void Motor(int directie)//programma voor het aangeven van de directie.
+int main(void)
 {
-    static int motorpositieL = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieL = motorpositieL + directie;
-    static int motorpositieR = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieR = motorpositieR + directie;
+    DDRA |= 0b11111111;
+    // Insert code
+    int i;
+    int r = 528;//2 rondjes wiel
+    int b = 828;//1 rondje wiel
+    int rb = 1356;//1 rondje wiel rechtdoor
+    int bb = 1656;//1 rondje wiel bocht
+    _delay_ms(1008);
+    for(i = 0; i<r; i++) //rechtdoor
+    {
+        _delay_ms(1);
+        PORTA = 0b00110011;
+        _delay_ms(1);
+        PORTA = 0b00100001;
+        _delay_ms(1);
+        PORTA = 0b01101001;
+        _delay_ms(1);
+        PORTA = 0b01001000;
+        _delay_ms(1);
+        PORTA = 0b11001100;
+        _delay_ms(1);
+        PORTA = 0b10000100;
+        _delay_ms(1);
+        PORTA = 0b10010110;
+        _delay_ms(1);
+        PORTA = 0b00010010;
+        _delay_ms(1);
 
-    if(motorpositieL == -1)
-    {
-        motorpositieL = 7;
     }
-    else if(motorpositieL == 8)
+for(i = 528; i<b; i++) //linksom 1e bocht 264 stap
     {
-        motorpositieL = 0;
+        PORTA = 0b00110011;
+        _delay_ms(1);
+        PORTA = 0b00100010;
+        _delay_ms(1);
+        PORTA = 0b01100110;
+        _delay_ms(1);
+        PORTA = 0b01000100;
+        _delay_ms(1);
+        PORTA = 0b11001100;
+        _delay_ms(1);
+        PORTA = 0b10001000;
+        _delay_ms(1);
+        PORTA = 0b10011001;
+        _delay_ms(1);
+        PORTA = 0b00010001;
+        _delay_ms(1);
+    }
+ for(i = 828; i<rb; i++) //rechtdoor
+    {
+        _delay_ms(1);
+        PORTA = 0b00110011;
+        _delay_ms(1);
+        PORTA = 0b00100001;
+        _delay_ms(1);
+        PORTA = 0b01101001;
+        _delay_ms(1);
+        PORTA = 0b01001000;
+        _delay_ms(1);
+        PORTA = 0b11001100;
+        _delay_ms(1);
+        PORTA = 0b10000100;
+        _delay_ms(1);
+        PORTA = 0b10010110;
+        _delay_ms(1);
+        PORTA = 0b00010010;
+        _delay_ms(1);
+    }
+for(i = 1356; i<bb; i++) //linksom 2e bocht 264 bocht
+    {
+        PORTA = 0b00110011;
+        _delay_ms(1);
+        PORTA = 0b00100010;
+        _delay_ms(1);
+        PORTA = 0b01100110;
+        _delay_ms(1);
+        PORTA = 0b01000100;
+        _delay_ms(1);
+        PORTA = 0b11001100;
+        _delay_ms(1);
+        PORTA = 0b10001000;
+        _delay_ms(1);
+        PORTA = 0b10011001;
+        _delay_ms(1);
+        PORTA = 0b00010001;
+        _delay_ms(1);
+    }
 
-    if(motorpositieR == -1)
-    {
-        motorpositieR = 7;
-    }
-    else if(motorpositieR == 8)
-    {
-        motorpositieR = 0;
-    }
-
-    switch(motorpositieL)
-    {
-    case 1:
-        PORTC = 0b00000101;
-        break;
-    case 2:
-        PORTA = 0b00000100;
-        break;
-    case 3:
-        PORTA = 0b00010100;
-        break;
-    case 4:
-        PORTA = 0b00010000;
-        break;
-    case 5:
-        PORTA = 0b01010000;
-        break;
-    case 6:
-        PORTA = 0b01000000;
-        break;
-    case 7:
-        PORTA = 0b01000001;
-        break;
-    case 8:
-        PORTA = 0b00000001;
-        break;
-    }
-    switch(motorpositieR)
-    {
-    case 1:
-        PORTC = 0b00001010;
-        break;
-    case 2:
-        PORTA = 0b00000010;
-        break;
-    case 3:
-        PORTA = 0b10000010;
-        break;
-    case 4:
-        PORTA = 0b10000000;
-        break;
-    case 5:
-        PORTA = 0b10100000;
-        break;
-    case 6:
-        PORTA = 0b00100000;
-        break;
-    case 7:
-        PORTA = 0b00101000;
-        break;
-    case 8:
-        PORTA = 0b00001000;
-        break;
-    }
+return 0;
+}
