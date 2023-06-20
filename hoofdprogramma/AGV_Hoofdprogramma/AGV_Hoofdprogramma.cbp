@@ -61,6 +61,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="agv_motor.h" />
+		<Unit filename="agv_tof.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="agv_tof.h" />
 		<Unit filename="agv_ultrasoon.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -72,6 +76,10 @@
 		<Unit filename="fuse.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="general_i2c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="general_i2c.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
