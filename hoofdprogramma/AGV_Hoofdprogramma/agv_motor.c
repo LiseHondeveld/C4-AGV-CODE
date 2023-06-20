@@ -115,11 +115,12 @@ ISR(TIMER4_OVF_vect){
 
 int PredefinedBocht(int start)
 {
+    static int BochtState = 0;
     if(start == 1)
     {
         MotorTrackingPositieL = 0;
         MotorTrackingPositieR = 0;
-
+        bochtState = 1;
         return(1);
     }
 
