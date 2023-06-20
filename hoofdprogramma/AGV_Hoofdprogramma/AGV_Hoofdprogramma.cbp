@@ -53,6 +53,9 @@
 		<Unit filename="Hoe_rijden.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="agv_buzzer.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="agv_motor.c">
 			<Option compilerVar="CC" />
 		</Unit>
