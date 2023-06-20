@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1687260568 source:c:\users\sande\documents\github\c4-agv-code\buzzertest\fuse.c
+	<avr/io.h>
+
+1687261255 source:c:\users\sande\documents\github\c4-agv-code\buzzertest\main.c
+	<avr/io.h>
+	<util/delay.h>
+
