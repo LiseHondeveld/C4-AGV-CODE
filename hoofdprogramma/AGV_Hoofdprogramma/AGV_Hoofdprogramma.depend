@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1687249879 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
+	<avr/interrupt.h>
+	<avr/io.h>
+
+1687249879 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
+	<avr/io.h>
+
+1687249879 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
+	<avr/io.h>
+
+1687255814 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+
