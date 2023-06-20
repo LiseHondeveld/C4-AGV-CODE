@@ -1,0 +1,6 @@
+#ifndef AGV_BUZZER_H_INCLUDED
+#define AGV_BUZZER_H_INCLUDED
+
+
+
+#endif // AGV_BUZZER_H_INCLUDED
