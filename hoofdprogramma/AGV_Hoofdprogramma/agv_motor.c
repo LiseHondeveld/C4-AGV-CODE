@@ -1,12 +1,44 @@
 //code voor motoraansturing
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
-void Motor(int directie)//programma voor het aangeven van de directie.
+int DirectieMotorL = 0;
+int DirectieMotorR = 0;
+int MotorTrackingPositieL = 0;
+int MotorTrackingPositieR = 0;
+
+void agv_motor_init()
 {
+    //timer 4 instellen op elke ms
+    cli();
+    TCCR4A = 0;
+    TCCR4B = 0;
+    TCNT4 = 6;
+    TCCR4A |= (1 << WGM01);
+    TCCR4B |= (1 << CS41) | (1 << CS40);//prescaler 64
+    TIMSK4 |= (1 << TOIE4);
+    sei();
+}
+
+int time_current_ms(int update){//0 = return, 1 = time++
+    static unsigned long long int time_ms = 0;
+    if (update == 1){
+        time_ms++;
+    }
+    return(time_ms);
+}
+
+ISR(TIMER4_OVF_vect){
+    //1ms timer code:
+    TCNT4 = 6;
+    time_current_ms(1);
+    //1ms motor code:
     static int motorpositieL = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieL = motorpositieL + directie;
+    motorpositieL = motorpositieL + DirectieMotorL;
+    MotorTrackingPositieL = MotorTrackingPositieL + DirectieMotorL;
     static int motorpositieR = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieR = motorpositieR + directie;
+    motorpositieR = motorpositieR + DirectieMotorR;
+    MotorTrackingPositieR = MotorTrackingPositieR + DirectieMotorR;
 
     if(motorpositieL == -1)
     {
@@ -15,7 +47,7 @@ void Motor(int directie)//programma voor het aangeven van de directie.
     else if(motorpositieL == 8)
     {
         motorpositieL = 0;
-
+    }
     if(motorpositieR == -1)
     {
         motorpositieR = 7;
@@ -79,4 +111,16 @@ void Motor(int directie)//programma voor het aangeven van de directie.
         PORTA = 0b00001000;
         break;
     }
+}
 
+int PredefinedBocht(int start)
+{
+    if(start == 1)
+    {
+        MotorTrackingPositieL = 0;
+        MotorTrackingPositieR = 0;
+
+        return(1);
+    }
+
+}
