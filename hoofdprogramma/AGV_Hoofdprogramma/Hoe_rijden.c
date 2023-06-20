@@ -3,13 +3,18 @@
 #define afstandmuur 50
 #define margemeer 55
 #define margeminder 45
+int firstL = 0;
+int firstR = 0;
 
 int rijden(int tv, int ta)    //tv = TOFvoorwaarde
 {                             //ta = TOFachterwaarde
     if(tv > margemeer && ta > margemeer){
         //motor langzaam rechts
+        if (firstL == 0){
+            MotorTrackingPositieL = 0;
+            firstL = 1;
+        }
         if (MotorTrackingPositieL <4){
-        MotorTrackingPositieL++;
         DirectieMotorL = 1;
         DirectieMotorR = 0;
         }
@@ -20,11 +25,15 @@ int rijden(int tv, int ta)    //tv = TOFvoorwaarde
     }
     if (!(tv > margemeer && ta > margemeer)){
         MotorTrackingPositieL = 0;
+        firstL = 0;
     }
     else if(tv < margeminder, ta < margeminder){
         //motor langzaam links
+        if (firstR == 0){
+            MotorTrackingPositieR = 0;
+            firstR = 1;
+        }
         if (MotorTrackingPositieR <4){
-        MotorTrackingPositieR++;
         DirectieMotorL = 0;
         DirectieMotorR = 1;
         }
@@ -35,6 +44,7 @@ int rijden(int tv, int ta)    //tv = TOFvoorwaarde
     }
     if (!(tv < margeminder, ta < margeminder)){
         MotorTrackingPositieR = 0;
+        firstR = 0;
     }
     else if(tv == ta){
         //rechtdoorrijden
