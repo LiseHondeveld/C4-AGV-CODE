@@ -57,6 +57,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="agv_ultrasoon.h" />
+		<Unit filename="agv_volgmodus.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="fuse.c">
 			<Option compilerVar="CC" />
 		</Unit>
