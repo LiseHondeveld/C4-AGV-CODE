@@ -29,21 +29,25 @@
 1687264464 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
 	<avr/io.h>
 
-1687251300 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
+1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
 	<avr/interrupt.h>
 	<avr/io.h>
 
 1687251300 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
 	<avr/io.h>
 
-1687264464 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
+1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
 	<avr/io.h>
-	<agv_motor.h>
+	"agv_motor.h"
 
 1687251300 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
 	<avr/io.h>
 
-1687264792 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+	<avr/io.h>
+	<avr/delay.h>
+	"agv_ultrasoon.h"
+	"agv_motor.h"
 
 1687341904 c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.h
 
@@ -140,5 +144,33 @@
 
 1687348588 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_schakelaar.c
 	<avr/io.h>
+	<util/delay.h>
+
+1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
+	"general_i2c.h"
+
+1687268030 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.h
+
+1687251300 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.h
+
+1687353317 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.h
+
+1687354162 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.c
+	<avr/io.h>
+	<avr/delay.h>
+	"agv_ultrasoon.h"
+	"agv_motor.h"
+
+1687353395 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.c
+	"agv_tof.h"
+
+1687268030 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.h
+
+1687353317 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.c
+	<avr/io.h>
+
+1687354001 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.c
+	<avr/io.h>
+	<avr/interrupt.h>
 	<util/delay.h>
 

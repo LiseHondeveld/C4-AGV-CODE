@@ -119,15 +119,8 @@ void PredefinedBocht(void)
     MotorTrackingPositieR = 0;
     while(MotorTrackingPositieL < 528)
     {
-<<<<<<< Updated upstream
-        MotorTrackingPositieL = 0;
-        MotorTrackingPositieR = 0;
-        BochtState = 1;
-        return(1);
-=======
         DirectieMotorL = 1;
         DirectieMotorR = 1;
->>>>>>> Stashed changes
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
