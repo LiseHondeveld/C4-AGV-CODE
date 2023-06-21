@@ -61,6 +61,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="agv_buzzer.h" />
+		<Unit filename="agv_display.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="agv_display.h" />
 		<Unit filename="agv_motor.c">
 			<Option compilerVar="CC" />
 		</Unit>
