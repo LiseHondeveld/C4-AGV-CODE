@@ -1,4 +1,4 @@
-#include "general_i2c.h"
+/*#include "general_i2c.h"
 #include <avr/io.h>
 
 void TWIInit(void)
@@ -91,3 +91,4 @@ uint8_t i2c_read_addr8_register8_pointer8(uint8_t addr8, uint8_t register8, uint
     TWIStop();
     return 0;
 }
+*/

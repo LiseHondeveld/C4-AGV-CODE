@@ -120,7 +120,7 @@ int PredefinedBocht(int start)
     {
         MotorTrackingPositieL = 0;
         MotorTrackingPositieR = 0;
-        bochtState = 1;
+        BochtState = 1;
         return(1);
     }
 

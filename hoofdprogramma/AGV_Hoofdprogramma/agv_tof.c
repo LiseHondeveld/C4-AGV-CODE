@@ -17,8 +17,9 @@
 #define REG_RESULT_RANGE_STATUS (0x14)
 
 
-uint8_t tof_init_addr8(uint8_t addr8)
+/*uint8_t tof_init_addr8(uint8_t addr8)
 {
 
 }
 uint8_t tof_data_init
+*/
