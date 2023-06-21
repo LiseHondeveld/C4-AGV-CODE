@@ -15,7 +15,7 @@ void agv_ultrasoon_init()
     TCCR3B |= (1<<WGM33) | (1<<CS31) | (1<<WGM32);//wgm33 wgm32 wgm31
     ICR3 = 32768;
     OCR3A = 20;//10microsec
-    OCR3B = 4500;// (10microsec + 480microsec+ marge) *2
+    OCR3B = 5500;// (10microsec + 480microsec+ marge) *2
     DDRE |= (1<<PE3);
     TIMSK3 |= (1<<ICIE3) | (1<<OCIE3B);
     //pin change interrupt:

@@ -30,12 +30,14 @@ void boomdetectie(void)
 
 void obstakeldetectie(void)
 {
-    if ((agv_ultrasoon_voor_links <= 7) || (agv_ultrasoon_voor_rechts <= 20)|| (agv_ultrasoon_voor_midden <= 20))
+    if ((agv_ultrasoon_voor_midden <= 7) || (agv_ultrasoon_voor_rechts <= 7) || (agv_ultrasoon_voor_links <= 7))
     {
         TIMSK4 &= ~(1<<TOIE4);
+        agv_buzzer_aan();
     }
     else
     {
         TIMSK4 |= (1<<TOIE4);
+        agv_buzzer_uit();
     }
 }
