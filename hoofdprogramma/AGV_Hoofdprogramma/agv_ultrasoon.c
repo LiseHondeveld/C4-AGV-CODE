@@ -11,15 +11,11 @@ volatile uint8_t agv_ultrasoon_current_sensor = 2;
 void agv_ultrasoon_init()
 {
     cli();
-    DDRB = (1<<PB7) | (1<<PB6) | (1<<PB5);
-    DDRA = 0b11111111;
-    //PORTA = 0b11111111;
-    //triger configuratie
     TCCR3A |= (1<<COM3A1) | (1<<WGM31);
     TCCR3B |= (1<<WGM33) | (1<<CS31) | (1<<WGM32);//wgm33 wgm32 wgm31
     ICR3 = 32768;
     OCR3A = 20;//10microsec
-    OCR3B = 5000;// (10microsec + 480microsec+ marge) *2
+    OCR3B = 4500;// (10microsec + 480microsec+ marge) *2
     DDRE |= (1<<PE3);
     TIMSK3 |= (1<<ICIE3) | (1<<OCIE3B);
     //pin change interrupt:
@@ -29,10 +25,6 @@ void agv_ultrasoon_init()
 
 ISR(TIMER3_COMPB_vect)
 {
-
-
-    PORTB |= (1<<PB6);
-    PORTB &= ~(1<<PB6);
     agv_ultrasoon_current_sensor = (agv_ultrasoon_current_sensor<<1);
     if (agv_ultrasoon_current_sensor == (1<<6))//0b00100000
     {
@@ -41,37 +33,33 @@ ISR(TIMER3_COMPB_vect)
     }
     PCMSK2 = agv_ultrasoon_current_sensor;
     //PORTA = agv_ultrasoon_current_sensor;
-    PCIFR |= (1<<PCIF2);
-    TIFR3 |= (1<<ICF3);
+    TIMSK3 |= (1<<OCIE3B);
 }
 
 ISR(TIMER3_CAPT_vect)
 {
-    PORTB |= (1<<PB5);
-    PORTB &= ~(1<<PB5);
     //zet max naar sensorwaarde
-    PORTA &= ~agv_ultrasoon_current_sensor;
     if(agv_ultrasoon_current_sensor == 0b00000010)
     {
-        agv_ultrasoon_boom_rechts = ICR3;
+        agv_ultrasoon_boom_rechts = (ICR3 - 4454)/4*0.0343;
     }
     else if(agv_ultrasoon_current_sensor == 0b00000100)
     {
-        agv_ultrasoon_boom_links = ICR3;
+        agv_ultrasoon_boom_links = (ICR3 - 4454)/4*0.0343;
     }
     else if(agv_ultrasoon_current_sensor == 0b00001000)
     {
-        agv_ultrasoon_voor_rechts = ICR3;
+        agv_ultrasoon_voor_rechts = (ICR3 - 4454)/4*0.0343;
     }
     else if(agv_ultrasoon_current_sensor == 0b00010000)
     {
-        agv_ultrasoon_voor_midden = ICR3;
+        agv_ultrasoon_voor_midden = (ICR3 - 4454)/4*0.0343;
     }
     else if(agv_ultrasoon_current_sensor == 0b00100000)
     {
-        agv_ultrasoon_voor_links = ICR3;
+        agv_ultrasoon_voor_links = (ICR3 - 4454)/4*0.0343;
     }
-    PCIFR &= ~(1<<PCIF2);
+    PCMSK2 = 0;
 
 }
 
@@ -103,7 +91,7 @@ ISR(PCINT2_vect)
         PORTA &= ~(0b00010000);
     }
     //check welke sensor en schrijf timer3 waarde naar sensorwaarde
-    TIFR3 &= ~(1<<ICF3);
+    TIMSK3 &= ~(1<<ICIE3);
     //zet timer3 overflow flag uit
-    PCIFR &= ~(1<<PCIF2);
+    PCMSK2 = 0;
 }
