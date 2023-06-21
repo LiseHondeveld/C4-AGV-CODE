@@ -6,7 +6,7 @@ volatile uint16_t agv_ultrasoon_boom_rechts = 0;
 volatile uint16_t agv_ultrasoon_voor_links = 0;
 volatile uint16_t agv_ultrasoon_voor_midden = 0;
 volatile uint16_t agv_ultrasoon_voor_rechts = 0;
-volatile uint8_t agv_ultrasoon_current_sensor = 1;
+volatile uint8_t agv_ultrasoon_current_sensor = 2;
 
 void agv_ultrasoon_init()
 {
@@ -34,12 +34,9 @@ ISR(TIMER3_COMPB_vect)
     PORTB |= (1<<PB6);
     PORTB &= ~(1<<PB6);
     agv_ultrasoon_current_sensor = (agv_ultrasoon_current_sensor<<1);
-    if (agv_ultrasoon_current_sensor == (1<<5))//0b00100000
+    if (agv_ultrasoon_current_sensor == (1<<6))//0b00100000
     {
-        //PORTB |= (1<<PB6);
-        //PORTB &= ~(1<<PB6);
-        agv_ultrasoon_current_sensor = 1;
-        PORTA |= 0b11111111;
+        agv_ultrasoon_current_sensor = 2;
 
     }
     PCMSK2 = agv_ultrasoon_current_sensor;
@@ -54,25 +51,25 @@ ISR(TIMER3_CAPT_vect)
     PORTB &= ~(1<<PB5);
     //zet max naar sensorwaarde
     PORTA &= ~agv_ultrasoon_current_sensor;
-    if(agv_ultrasoon_current_sensor == 0b00000001)
-    {
-        agv_ultrasoon_boom_links = ICR3;
-    }
-    else if(agv_ultrasoon_current_sensor == 0b00000010)
+    if(agv_ultrasoon_current_sensor == 0b00000010)
     {
         agv_ultrasoon_boom_rechts = ICR3;
     }
     else if(agv_ultrasoon_current_sensor == 0b00000100)
     {
-        agv_ultrasoon_voor_links = ICR3;
+        agv_ultrasoon_boom_links = ICR3;
     }
     else if(agv_ultrasoon_current_sensor == 0b00001000)
     {
-        agv_ultrasoon_voor_midden = ICR3;
+        agv_ultrasoon_voor_rechts = ICR3;
     }
     else if(agv_ultrasoon_current_sensor == 0b00010000)
     {
-        agv_ultrasoon_voor_rechts = ICR3;
+        agv_ultrasoon_voor_midden = ICR3;
+    }
+    else if(agv_ultrasoon_current_sensor == 0b00100000)
+    {
+        agv_ultrasoon_voor_links = ICR3;
     }
     PCIFR &= ~(1<<PCIF2);
 
@@ -84,29 +81,29 @@ ISR(PCINT2_vect)
     PORTB |= (1<<PB7);
     PORTB &= ~(1<<PB7);
 
-    if(agv_ultrasoon_current_sensor == 0b00000001)
+    if(agv_ultrasoon_current_sensor == 0b00000010)
     {
-        agv_ultrasoon_boom_links = TCNT3;
+        agv_ultrasoon_boom_links = (TCNT3 - 4454)/4*0.343;
         PORTA &= ~(0b00000001);
-    }
-    else if(agv_ultrasoon_current_sensor == 0b00000010)
-    {
-        agv_ultrasoon_boom_rechts = TCNT3;
-        PORTA &= ~(0b00000010);
     }
     else if(agv_ultrasoon_current_sensor == 0b00000100)
     {
-        agv_ultrasoon_voor_links = TCNT3;
-        PORTA &= ~(0b0000100);
+        agv_ultrasoon_boom_rechts = (TCNT3 - 4454)/4*0.343;
+        PORTA &= ~(0b00000010);
     }
     else if(agv_ultrasoon_current_sensor == 0b00001000)
     {
-        agv_ultrasoon_voor_midden = TCNT3;
-        PORTA &= ~(0b00001000);
+        agv_ultrasoon_voor_links = (TCNT3 - 4454)/4*0.343;
+        PORTA &= ~(0b0000100);
     }
     else if(agv_ultrasoon_current_sensor == 0b00010000)
     {
-        agv_ultrasoon_voor_rechts = TCNT3;
+        agv_ultrasoon_voor_midden = (TCNT3 - 4454)/4*0.343;
+        PORTA &= ~(0b00001000);
+    }
+    else if(agv_ultrasoon_current_sensor == 0b00100000)
+    {
+        agv_ultrasoon_voor_rechts = (TCNT3 - 4454)/4*0.343;
         PORTA &= ~(0b00010000);
     }
     //check welke sensor en schrijf timer3 waarde naar sensorwaarde
