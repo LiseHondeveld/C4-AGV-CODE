@@ -83,17 +83,17 @@ ISR(PCINT2_vect)
 
     if(agv_ultrasoon_current_sensor == 0b00000010)
     {
-        agv_ultrasoon_boom_links = (TCNT3 - 4454)/4*0.343;
+        agv_ultrasoon_boom_rechts = (TCNT3 - 4454)/4*0.343;
         PORTA &= ~(0b00000001);
     }
     else if(agv_ultrasoon_current_sensor == 0b00000100)
     {
-        agv_ultrasoon_boom_rechts = (TCNT3 - 4454)/4*0.343;
+        agv_ultrasoon_boom_links = (TCNT3 - 4454)/4*0.343;
         PORTA &= ~(0b00000010);
     }
     else if(agv_ultrasoon_current_sensor == 0b00001000)
     {
-        agv_ultrasoon_voor_links = (TCNT3 - 4454)/4*0.343;
+        agv_ultrasoon_voor_rechts = (TCNT3 - 4454)/4*0.343;
         PORTA &= ~(0b0000100);
     }
     else if(agv_ultrasoon_current_sensor == 0b00010000)
@@ -103,7 +103,7 @@ ISR(PCINT2_vect)
     }
     else if(agv_ultrasoon_current_sensor == 0b00100000)
     {
-        agv_ultrasoon_voor_rechts = (TCNT3 - 4454)/4*0.343;
+        agv_ultrasoon_voor_links = (TCNT3 - 4454)/4*0.343;
         PORTA &= ~(0b00010000);
     }
     //check welke sensor en schrijf timer3 waarde naar sensorwaarde
