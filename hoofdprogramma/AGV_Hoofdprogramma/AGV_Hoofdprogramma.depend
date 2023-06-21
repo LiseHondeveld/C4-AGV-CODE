@@ -6,11 +6,16 @@
 1687249879 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
 	<avr/io.h>
 
-1687342199 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
+1687343795 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
 	<avr/io.h>
 	"agv_boomdetectie.h"
 	"agv_motor.h"
 	<util/delay.h>
+	"agv_ultrasoon.h"
+	<avr/io.h>
+	<avr/interrupt.h>
+	<string.h>
+	<avr/delay.h>
 
 1687342086 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
 	<avr/io.h>
