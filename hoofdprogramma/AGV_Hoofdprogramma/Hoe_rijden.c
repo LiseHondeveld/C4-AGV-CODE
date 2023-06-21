@@ -23,10 +23,7 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
             DirectieMotorR = 1;
         }
     }
-    if (!(tv > margemeer && ta > margemeer)){
-        MotorTrackingPositieL = 0;
-        firstL = 0;
-    }
+
     else if(tv < margeminder && ta < margeminder){
         //motor langzaam links
         if (firstR == 0){
@@ -42,10 +39,7 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
             DirectieMotorR = 1;
         }
     }
-    if (!(tv < margeminder && ta < margeminder)){
-        MotorTrackingPositieR = 0;
-        firstR = 0;
-    }
+
     else if(tv == ta){
         //rechtdoorrijden
         DirectieMotorL = 1;
@@ -64,6 +58,16 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
             DirectieMotorL = 0;
             DirectieMotorR = 1;
         }
+    }
+
+    if (!(tv > margemeer && ta > margemeer)){
+        MotorTrackingPositieL = 0;
+        firstL = 0;
+    }
+
+    if (!(tv < margeminder && ta < margeminder)){
+        MotorTrackingPositieR = 0;
+        firstR = 0;
     }
 }
 
