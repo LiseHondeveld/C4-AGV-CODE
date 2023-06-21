@@ -10,9 +10,9 @@ void boomdetectie(void)
         DirectieMotorL = 0;
         DirectieMotorR = 0;// karretje niet rijden
 
-        agv_buzzer_aan;
+        agv_buzzer_aan();
         _delay_ms(1000);
-        agv_buzzer_uit;
+        agv_buzzer_uit();
         // buzzer aan voor 1 sec
     }
     if (agv_ultrasoon_boom_rechts <=20)
@@ -20,9 +20,9 @@ void boomdetectie(void)
         DirectieMotorL = 0;
         DirectieMotorR = 0;// karretje niet rijden
 
-        agv_buzzer_aan; // buzzer aan voor 1 sec
+        agv_buzzer_aan(); // buzzer aan voor 1 sec
         _delay_ms(1000);
-        agv_buzzer_uit;
+        agv_buzzer_uit();
     }
 }
 

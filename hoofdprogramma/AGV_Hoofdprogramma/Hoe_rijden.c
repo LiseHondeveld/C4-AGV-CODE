@@ -1,5 +1,5 @@
 #include <avr/io.h>
-#include <agv_motor.h>
+#include "agv_motor.h"
 #define afstandmuur 50
 #define margemeer 55
 #define margeminder 45
@@ -8,7 +8,7 @@ int firstR = 0;
 
 void rijden(int tv, int ta)    //tv = TOFvoorwaarde
 {                             //ta = TOFachterwaarde
-    if(tv > margemeer && ta > margemeer){
+    if((tv > margemeer) && (ta > margemeer)){
         //motor langzaam rechts
         if (firstL == 0){
             MotorTrackingPositieL = 0;
