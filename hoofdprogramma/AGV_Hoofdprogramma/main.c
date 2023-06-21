@@ -124,6 +124,7 @@ int main(void)
     agv_buzzer_init();
     agv_ultrasoon_init();
     // Insert code
+<<<<<<< Updated upstream
     agv_buzzer_aan();
     _delay_ms(1000);
     agv_buzzer_uit();
@@ -133,6 +134,11 @@ int main(void)
         boomdetectie();
         transmit_data(tofsensordata);
 }
+=======
+
+    PredefinedBocht();
+
+>>>>>>> Stashed changes
 
     return 0;
 }

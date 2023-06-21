@@ -6,5 +6,6 @@ extern int DirectieMotorL;
 extern int DirectieMotorR;
 extern int MotorTrackingPositieL;
 extern int MotorTrackingPositieR;
+void PredefinedBocht(void);
 
 #endif // AGV_MOTOR_H_INCLUDED

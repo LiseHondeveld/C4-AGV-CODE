@@ -61,7 +61,7 @@ uint8_t i2c_write_addr8_register8_data8(uint8_t addr8,uint8_t register8, uint8_t
     TWIWrite(register8);
     if (TWIGetStatus() != 0x28)
         return 1;
-    TWIWRITE(data8);
+    TWIWrite(data8);
     if (TWIGetStatus() != 0x28)
         return 1;
     TWIStop();
@@ -72,7 +72,7 @@ uint8_t i2c_read_addr8_register8_pointer8(uint8_t addr8, uint8_t register8, uint
 {
     TWIStart();
     if (TWIGetStatus() != 0x08)
-        return ERROR;
+        return 1;
     TWIWrite(addr8);
     if (TWIGetStatus() != 0x18)
         return 1;
@@ -85,7 +85,7 @@ uint8_t i2c_read_addr8_register8_pointer8(uint8_t addr8, uint8_t register8, uint
     TWIWrite(addr8);
     if (TWIGetStatus() != 0x40)
         return 1;
-    TWIReadNACK(&pointer8);
+    TWIReadNACK();
     if (TWIGetStatus() != 0x58)
         return 1;
     TWIStop();
