@@ -6,12 +6,18 @@
 1687249879 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
 	<avr/io.h>
 
-1687249879 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
+1687335991 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
 	<avr/io.h>
+	"agv_boomdetectie.h"
+	"agv_motor.h"
 
-1687255814 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+1687335447 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+	<avr/io.h>
+	<avr/delay.h>
+	"agv_ultrasoon.h"
 
-1687258722 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
+1687264285 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
+	<avr/io.h>
 
 1687264464 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
 	<avr/io.h>
@@ -31,4 +37,12 @@
 	<avr/io.h>
 
 1687264792 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+
+1687249879 c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.h
+
+1687335447 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
+
+1687336365 c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.h
+
+1687260134 c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.h
 
