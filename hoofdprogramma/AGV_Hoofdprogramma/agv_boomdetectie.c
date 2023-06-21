@@ -3,7 +3,7 @@
 #include "agv_ultrasoon.h"
 #include "agv_motor.h"
 
-int boomdetectie(void)
+void boomdetectie(void)
 {
     if (agv_ultrasoon_boom_links <= 20)
     {
@@ -26,9 +26,9 @@ int boomdetectie(void)
     }
 }
 
-int obstakeldetectie(void)
+void obstakeldetectie(void)
 {
-    if ((agv_ultrasoon_voor_links =< 20) || (agv_ultrasoon_voor_rechts =< 20) || (agv_ultrasoon_voor_midden =< 20))
+    if ((agv_ultrasoon_voor_links <= 20) || (agv_ultrasoon_voor_rechts <= 20) || (agv_ultrasoon_voor_midden <= 20))
     {
         TIMSK4 &= ~(1<<TOIE4);
     }

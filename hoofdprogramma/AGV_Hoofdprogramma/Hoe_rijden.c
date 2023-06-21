@@ -6,7 +6,7 @@
 int firstL = 0;
 int firstR = 0;
 
-int rijden(int tv, int ta)    //tv = TOFvoorwaarde
+void rijden(int tv, int ta)    //tv = TOFvoorwaarde
 {                             //ta = TOFachterwaarde
     if(tv > margemeer && ta > margemeer){
         //motor langzaam rechts
