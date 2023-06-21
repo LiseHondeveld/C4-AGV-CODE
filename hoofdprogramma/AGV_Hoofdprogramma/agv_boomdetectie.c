@@ -5,7 +5,7 @@
 
 void boomdetectie(void)
 {
-    if (agv_ultrasoon_boom_links <= 20)
+    if (agv_ultrasoon_boom_links <= 10)
     {
         DirectieMotorL = 0;
         DirectieMotorR = 0;// karretje niet rijden
@@ -13,9 +13,10 @@ void boomdetectie(void)
         agv_buzzer_aan();
         _delay_ms(1000);
         agv_buzzer_uit();
+        _delay_ms(1000);
         // buzzer aan voor 1 sec
     }
-    if (agv_ultrasoon_boom_rechts <=20)
+    if (agv_ultrasoon_boom_rechts <=10)
     {
         DirectieMotorL = 0;
         DirectieMotorR = 0;// karretje niet rijden
@@ -28,7 +29,7 @@ void boomdetectie(void)
 
 void obstakeldetectie(void)
 {
-    if ((agv_ultrasoon_voor_links <= 20) || (agv_ultrasoon_voor_rechts <= 20) || (agv_ultrasoon_voor_midden <= 20))
+    if ((agv_ultrasoon_voor_links <= 20) || (agv_ultrasoon_voor_rechts <= 20)|| (agv_ultrasoon_voor_midden <= 20))
     {
         TIMSK4 &= ~(1<<TOIE4);
     }
