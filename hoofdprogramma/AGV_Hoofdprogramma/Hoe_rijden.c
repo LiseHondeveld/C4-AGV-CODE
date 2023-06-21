@@ -71,3 +71,8 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     }
 }
 
+void blind_rijden (void){
+    DirectieMotorL = 1;
+    DirectieMotorR = 1;
+}
+

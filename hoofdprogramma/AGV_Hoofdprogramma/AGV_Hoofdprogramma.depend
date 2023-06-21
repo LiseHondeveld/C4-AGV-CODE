@@ -60,7 +60,7 @@
 1687340271 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
 	"general_i2c.h"
 
-1687344457 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
+1687349289 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
 	<avr/interrupt.h>
 	<avr/io.h>
 
@@ -75,11 +75,16 @@
 1687255745 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
 	<avr/io.h>
 
-1687344457 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
+1687349289 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
 	<avr/io.h>
 	"agv_boomdetectie.h"
 	"agv_motor.h"
 	<util/delay.h>
+	"agv_ultrasoon.h"
+	<avr/io.h>
+	<avr/interrupt.h>
+	<string.h>
+	<avr/delay.h>
 
 1687337080 c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.h
 
@@ -91,7 +96,7 @@
 	"agv_ultrasoon.h"
 	"agv_motor.h"
 
-1687338074 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
+1687351091 source:c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
 	<avr/io.h>
 	"agv_motor.h"
 
