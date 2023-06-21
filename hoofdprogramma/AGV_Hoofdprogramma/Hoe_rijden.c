@@ -27,7 +27,7 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
         MotorTrackingPositieL = 0;
         firstL = 0;
     }
-    else if(tv < margeminder, ta < margeminder){
+    else if(tv < margeminder && ta < margeminder){
         //motor langzaam links
         if (firstR == 0){
             MotorTrackingPositieR = 0;
@@ -42,7 +42,7 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
             DirectieMotorR = 1;
         }
     }
-    if (!(tv < margeminder, ta < margeminder)){
+    if (!(tv < margeminder && ta < margeminder)){
         MotorTrackingPositieR = 0;
         firstR = 0;
     }
