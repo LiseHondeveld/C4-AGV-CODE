@@ -11,6 +11,8 @@ void agv_motor_init()
 {
     //timer 4 instellen op elke ms
     cli();
+    DDRA |= 0b10101010;
+    DDRC |= 0b01010101;
     TCCR4A = 0;
     TCCR4B = 0;
     TCNT4 = 6;
@@ -34,7 +36,7 @@ ISR(TIMER4_OVF_vect){
     time_current_ms(1);
     //1ms motor code:
     static int motorpositieL = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieL = motorpositieL + DirectieMotorL;
+    motorpositieL = motorpositieL - DirectieMotorL;
     MotorTrackingPositieL = MotorTrackingPositieL + DirectieMotorL;
     static int motorpositieR = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
     motorpositieR = motorpositieR + DirectieMotorR;
@@ -84,7 +86,7 @@ ISR(TIMER4_OVF_vect){
         PORTC = 0b00000001;
         break;
     }
-    switch(motorpositieL)
+    switch(motorpositieR)
     {
     case 1:
         PORTA = 0b00001010;
@@ -117,43 +119,41 @@ void PredefinedBocht(void)
 {
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
-    while(MotorTrackingPositieL < 528)
+    while(MotorTrackingPositieL < 528*8)
     {
-<<<<<<< Updated upstream
-        MotorTrackingPositieL = 0;
-        MotorTrackingPositieR = 0;
-        BochtState = 1;
-        return(1);
-=======
         DirectieMotorL = 1;
         DirectieMotorR = 1;
->>>>>>> Stashed changes
+        obstakeldetectie();
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
-    while(MotorTrackingPositieL < 300)
+    while(MotorTrackingPositieL < 300*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = -1;
+        obstakeldetectie();
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
-    while(MotorTrackingPositieL < 1000)
+    while(MotorTrackingPositieL < 1000*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = 1;
+        obstakeldetectie();
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
-    while(MotorTrackingPositieL < 300)
+    while(MotorTrackingPositieL < 300*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = -1;
+        obstakeldetectie();
     }
-        while(MotorTrackingPositieL < 828)
+        while(MotorTrackingPositieL < 828*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = 1;
+        obstakeldetectie();
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;

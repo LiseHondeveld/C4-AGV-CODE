@@ -11,7 +11,7 @@ void boomdetectie(void)
         DirectieMotorR = 0;// karretje niet rijden
 
         agv_buzzer_aan();
-        _delay_ms(1000);
+        _delay_ms(400);
         agv_buzzer_uit();
         _delay_ms(1000);
         // buzzer aan voor 1 sec
@@ -22,19 +22,22 @@ void boomdetectie(void)
         DirectieMotorR = 0;// karretje niet rijden
 
         agv_buzzer_aan(); // buzzer aan voor 1 sec
-        _delay_ms(1000);
+        _delay_ms(400);
         agv_buzzer_uit();
+        _delay_ms(1000);
     }
 }
 
 void obstakeldetectie(void)
 {
-    if ((agv_ultrasoon_voor_links <= 20) || (agv_ultrasoon_voor_rechts <= 20)|| (agv_ultrasoon_voor_midden <= 20))
+    if ((agv_ultrasoon_voor_midden <= 7) || (agv_ultrasoon_voor_rechts <= 7) || (agv_ultrasoon_voor_links <= 7))
     {
         TIMSK4 &= ~(1<<TOIE4);
+        agv_buzzer_aan();
     }
     else
     {
         TIMSK4 |= (1<<TOIE4);
+        agv_buzzer_uit();
     }
 }
