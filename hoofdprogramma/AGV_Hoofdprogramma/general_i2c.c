@@ -4,8 +4,8 @@
 void TWIInit(void)
 {
     //set SCL to 400kHz
-    TWSR = 0x00;
-    TWBR = 0x0C;
+    TWSR = 0x01;
+    TWBR = 0x12;
     //enable TWI
     TWCR = (1<<TWEN);
 }
