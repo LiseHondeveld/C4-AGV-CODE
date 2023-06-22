@@ -20,7 +20,8 @@ int main(void)
     //PredefinedBocht();
 
     //test
-    //esmeE WAS HIer
+    //esmeE WAS HIer niet
+    //hallo, ik ben jarig
 
     while(1)
     {

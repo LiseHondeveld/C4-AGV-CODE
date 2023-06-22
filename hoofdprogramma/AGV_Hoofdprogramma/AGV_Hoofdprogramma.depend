@@ -23,7 +23,7 @@
 1687421132 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
 	<avr/io.h>
 
-1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
+1687425944 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
 	<avr/io.h>
 
 1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
@@ -33,7 +33,7 @@
 1687251300 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
 	<avr/io.h>
 
-1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
+1687425944 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
 	<avr/io.h>
 	"agv_motor.h"
 
@@ -143,30 +143,30 @@
 	<avr/io.h>
 	<util/delay.h>
 
-1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
+1687433420 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
 	"general_i2c.h"
 
-1687268030 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.h
+1687425944 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.h
 
 1687251300 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.h
 
 1687353317 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.h
 
-1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.c
+1687433420 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.c
 	<avr/io.h>
 	<avr/delay.h>
 	"agv_ultrasoon.h"
 	"agv_motor.h"
 
-1687353395 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.c
-	"agv_tof.h"
+1687433422 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.c
 
 1687268030 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.h
 
-1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.c
+1687425944 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.c
+	"general_i2c.h"
 	<avr/io.h>
 
-1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.c
+1687433433 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.c
 	<avr/io.h>
 	<avr/interrupt.h>
 	<util/delay.h>
@@ -241,6 +241,10 @@
 1687362871 c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.h
 
 1687362871 source:c:\users\bastiaan snoeij\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_schakelaar.c
+	<avr/io.h>
+	<util/delay.h>
+
+1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_schakelaar.c
 	<avr/io.h>
 	<util/delay.h>
 

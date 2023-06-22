@@ -29,7 +29,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  12 .debug_str    000008e2  00000000  00000000  000077a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_line_str 00000287  00000000  00000000  00008082  2**0
+ 13 .debug_line_str 000002de  00000000  00000000  00008082  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1690,24 +1690,15 @@ Disassembly of section .text:
      ae4:	08 95       	ret
 
 00000ae6 <agv_motor_init>:
-int DirectieMotorR = 0;
-int MotorTrackingPositieL = 0;
-int MotorTrackingPositieR = 0;
-
-void agv_motor_init()
-{
      ae6:	cf 93       	push	r28
      ae8:	df 93       	push	r29
      aea:	cd b7       	in	r28, 0x3d	; 61
      aec:	de b7       	in	r29, 0x3e	; 62
 
 00000aee <.Loc.1>:
-    //timer 4 instellen op elke ms
-    cli();
      aee:	f8 94       	cli
 
 00000af0 <.Loc.2>:
-    DDRA |= 0b10101010;
      af0:	81 e2       	ldi	r24, 0x21	; 33
      af2:	90 e0       	ldi	r25, 0x00	; 0
      af4:	fc 01       	movw	r30, r24
@@ -1721,7 +1712,6 @@ void agv_motor_init()
      b00:	20 83       	st	Z, r18
 
 00000b02 <.Loc.4>:
-    DDRC |= 0b01010101;
      b02:	87 e2       	ldi	r24, 0x27	; 39
      b04:	90 e0       	ldi	r25, 0x00	; 0
      b06:	fc 01       	movw	r30, r24
@@ -1735,7 +1725,6 @@ void agv_motor_init()
      b12:	20 83       	st	Z, r18
 
 00000b14 <.Loc.6>:
-    TCCR4A = 0;
      b14:	80 ea       	ldi	r24, 0xA0	; 160
      b16:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -1744,7 +1733,6 @@ void agv_motor_init()
      b1a:	10 82       	st	Z, r1
 
 00000b1c <.Loc.8>:
-    TCCR4B = 0;
      b1c:	81 ea       	ldi	r24, 0xA1	; 161
      b1e:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -1753,7 +1741,6 @@ void agv_motor_init()
      b22:	10 82       	st	Z, r1
 
 00000b24 <.Loc.10>:
-    TCNT4 = 6;
      b24:	84 ea       	ldi	r24, 0xA4	; 164
      b26:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -1765,7 +1752,6 @@ void agv_motor_init()
      b30:	20 83       	st	Z, r18
 
 00000b32 <.Loc.12>:
-    TCCR4A |= (1 << WGM41);
      b32:	80 ea       	ldi	r24, 0xA0	; 160
      b34:	90 e0       	ldi	r25, 0x00	; 0
      b36:	fc 01       	movw	r30, r24
@@ -1779,7 +1765,6 @@ void agv_motor_init()
      b42:	20 83       	st	Z, r18
 
 00000b44 <.Loc.14>:
-    TCCR4B |= (1 << CS41) | (1 << CS40);//prescaler 64
      b44:	81 ea       	ldi	r24, 0xA1	; 161
      b46:	90 e0       	ldi	r25, 0x00	; 0
      b48:	fc 01       	movw	r30, r24
@@ -1793,7 +1778,6 @@ void agv_motor_init()
      b54:	20 83       	st	Z, r18
 
 00000b56 <.Loc.16>:
-    TIMSK4 |= (1 << TOIE4);
      b56:	82 e7       	ldi	r24, 0x72	; 114
      b58:	90 e0       	ldi	r25, 0x00	; 0
      b5a:	fc 01       	movw	r30, r24
@@ -1807,19 +1791,15 @@ void agv_motor_init()
      b66:	20 83       	st	Z, r18
 
 00000b68 <.Loc.18>:
-    sei();
      b68:	78 94       	sei
 
 00000b6a <.Loc.19>:
-}
      b6a:	00 00       	nop
      b6c:	df 91       	pop	r29
      b6e:	cf 91       	pop	r28
      b70:	08 95       	ret
 
 00000b72 <time_current_ms>:
-
-int time_current_ms(int update){//0 = return, 1 = time++
      b72:	8f 92       	push	r8
      b74:	9f 92       	push	r9
      b76:	af 92       	push	r10
@@ -1840,8 +1820,6 @@ int time_current_ms(int update){//0 = return, 1 = time++
      b94:	89 83       	std	Y+1, r24	; 0x01
 
 00000b96 <.Loc.21>:
-    static unsigned long long int time_ms = 0;
-    if (update == 1){
      b96:	89 81       	ldd	r24, Y+1	; 0x01
      b98:	9a 81       	ldd	r25, Y+2	; 0x02
      b9a:	81 30       	cpi	r24, 0x01	; 1
@@ -1849,7 +1827,6 @@ int time_current_ms(int update){//0 = return, 1 = time++
      b9e:	99 f5       	brne	.+102    	; 0xc06 <.L3>
 
 00000ba0 <.Loc.22>:
-        time_ms++;
      ba0:	80 90 1b 02 	lds	r8, 0x021B	; 0x80021b <time_ms.2>
      ba4:	90 90 1c 02 	lds	r9, 0x021C	; 0x80021c <time_ms.2+0x1>
      ba8:	a0 90 1d 02 	lds	r10, 0x021D	; 0x80021d <time_ms.2+0x2>
@@ -1886,8 +1863,6 @@ int time_current_ms(int update){//0 = return, 1 = time++
      c02:	f0 92 22 02 	sts	0x0222, r15	; 0x800222 <time_ms.2+0x7>
 
 00000c06 <.L3>:
-    }
-    return(time_ms);
      c06:	00 91 1b 02 	lds	r16, 0x021B	; 0x80021b <time_ms.2>
      c0a:	10 91 1c 02 	lds	r17, 0x021C	; 0x80021c <time_ms.2+0x1>
      c0e:	20 91 1d 02 	lds	r18, 0x021D	; 0x80021d <time_ms.2+0x2>
@@ -1899,7 +1874,6 @@ int time_current_ms(int update){//0 = return, 1 = time++
      c26:	c8 01       	movw	r24, r16
 
 00000c28 <.Loc.24>:
-}
      c28:	0f 90       	pop	r0
      c2a:	0f 90       	pop	r0
      c2c:	df 91       	pop	r29
@@ -1917,8 +1891,6 @@ int time_current_ms(int update){//0 = return, 1 = time++
      c44:	08 95       	ret
 
 00000c46 <__vector_45>:
-
-ISR(TIMER4_OVF_vect){
      c46:	1f 92       	push	r1
      c48:	0f 92       	push	r0
      c4a:	0f b6       	in	r0, 0x3f	; 63
@@ -1944,8 +1916,6 @@ ISR(TIMER4_OVF_vect){
      c72:	de b7       	in	r29, 0x3e	; 62
 
 00000c74 <.Loc.26>:
-    //1ms timer code:
-    TCNT4 = 6;
      c74:	84 ea       	ldi	r24, 0xA4	; 164
      c76:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -1957,15 +1927,11 @@ ISR(TIMER4_OVF_vect){
      c80:	20 83       	st	Z, r18
 
 00000c82 <.Loc.28>:
-    time_current_ms(1);
      c82:	81 e0       	ldi	r24, 0x01	; 1
      c84:	90 e0       	ldi	r25, 0x00	; 0
      c86:	0e 94 b9 05 	call	0xb72	; 0xb72 <time_current_ms>
 
 00000c8a <.Loc.29>:
-    //1ms motor code:
-    static int motorpositieL = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieL = motorpositieL - DirectieMotorL;
      c8a:	20 91 23 02 	lds	r18, 0x0223	; 0x800223 <motorpositieL.1>
      c8e:	30 91 24 02 	lds	r19, 0x0224	; 0x800224 <motorpositieL.1+0x1>
      c92:	80 91 13 02 	lds	r24, 0x0213	; 0x800213 <DirectieMotorL>
@@ -1980,7 +1946,6 @@ ISR(TIMER4_OVF_vect){
      ca6:	80 93 23 02 	sts	0x0223, r24	; 0x800223 <motorpositieL.1>
 
 00000caa <.Loc.31>:
-    MotorTrackingPositieL = MotorTrackingPositieL + DirectieMotorL;
      caa:	20 91 17 02 	lds	r18, 0x0217	; 0x800217 <MotorTrackingPositieL>
      cae:	30 91 18 02 	lds	r19, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
      cb2:	80 91 13 02 	lds	r24, 0x0213	; 0x800213 <DirectieMotorL>
@@ -1993,8 +1958,6 @@ ISR(TIMER4_OVF_vect){
      cc2:	80 93 17 02 	sts	0x0217, r24	; 0x800217 <MotorTrackingPositieL>
 
 00000cc6 <.Loc.33>:
-    static int motorpositieR = 0;//int aangemaakt om de positie van de linker motor te kunnen aansturen.
-    motorpositieR = motorpositieR + DirectieMotorR;
      cc6:	20 91 25 02 	lds	r18, 0x0225	; 0x800225 <motorpositieR.0>
      cca:	30 91 26 02 	lds	r19, 0x0226	; 0x800226 <motorpositieR.0+0x1>
      cce:	80 91 15 02 	lds	r24, 0x0215	; 0x800215 <DirectieMotorR>
@@ -2007,7 +1970,6 @@ ISR(TIMER4_OVF_vect){
      cde:	80 93 25 02 	sts	0x0225, r24	; 0x800225 <motorpositieR.0>
 
 00000ce2 <.Loc.35>:
-    MotorTrackingPositieR = MotorTrackingPositieR + DirectieMotorR;
      ce2:	20 91 19 02 	lds	r18, 0x0219	; 0x800219 <MotorTrackingPositieR>
      ce6:	30 91 1a 02 	lds	r19, 0x021A	; 0x80021a <MotorTrackingPositieR+0x1>
      cea:	80 91 15 02 	lds	r24, 0x0215	; 0x800215 <DirectieMotorR>
@@ -2020,8 +1982,6 @@ ISR(TIMER4_OVF_vect){
      cfa:	80 93 19 02 	sts	0x0219, r24	; 0x800219 <MotorTrackingPositieR>
 
 00000cfe <.Loc.37>:
-
-    if(motorpositieL == -1)
      cfe:	80 91 23 02 	lds	r24, 0x0223	; 0x800223 <motorpositieL.1>
      d02:	90 91 24 02 	lds	r25, 0x0224	; 0x800224 <motorpositieL.1+0x1>
 
@@ -2031,8 +1991,6 @@ ISR(TIMER4_OVF_vect){
      d0a:	39 f4       	brne	.+14     	; 0xd1a <.L6>
 
 00000d0c <.Loc.39>:
-    {
-        motorpositieL = 7;
      d0c:	87 e0       	ldi	r24, 0x07	; 7
      d0e:	90 e0       	ldi	r25, 0x00	; 0
      d10:	90 93 24 02 	sts	0x0224, r25	; 0x800224 <motorpositieL.1+0x1>
@@ -2040,8 +1998,6 @@ ISR(TIMER4_OVF_vect){
      d18:	0b c0       	rjmp	.+22     	; 0xd30 <.L7>
 
 00000d1a <.L6>:
-    }
-    else if(motorpositieL == 8)
      d1a:	80 91 23 02 	lds	r24, 0x0223	; 0x800223 <motorpositieL.1>
      d1e:	90 91 24 02 	lds	r25, 0x0224	; 0x800224 <motorpositieL.1+0x1>
 
@@ -2051,14 +2007,10 @@ ISR(TIMER4_OVF_vect){
      d26:	21 f4       	brne	.+8      	; 0xd30 <.L7>
 
 00000d28 <.Loc.42>:
-    {
-        motorpositieL = 0;
      d28:	10 92 24 02 	sts	0x0224, r1	; 0x800224 <motorpositieL.1+0x1>
      d2c:	10 92 23 02 	sts	0x0223, r1	; 0x800223 <motorpositieL.1>
 
 00000d30 <.L7>:
-    }
-    if(motorpositieR == -1)
      d30:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <motorpositieR.0>
      d34:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <motorpositieR.0+0x1>
 
@@ -2068,8 +2020,6 @@ ISR(TIMER4_OVF_vect){
      d3c:	39 f4       	brne	.+14     	; 0xd4c <.L8>
 
 00000d3e <.Loc.45>:
-    {
-        motorpositieR = 7;
      d3e:	87 e0       	ldi	r24, 0x07	; 7
      d40:	90 e0       	ldi	r25, 0x00	; 0
      d42:	90 93 26 02 	sts	0x0226, r25	; 0x800226 <motorpositieR.0+0x1>
@@ -2077,8 +2027,6 @@ ISR(TIMER4_OVF_vect){
      d4a:	0b c0       	rjmp	.+22     	; 0xd62 <.L9>
 
 00000d4c <.L8>:
-    }
-    else if(motorpositieR == 8)
      d4c:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <motorpositieR.0>
      d50:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <motorpositieR.0+0x1>
 
@@ -2088,15 +2036,10 @@ ISR(TIMER4_OVF_vect){
      d58:	21 f4       	brne	.+8      	; 0xd62 <.L9>
 
 00000d5a <.Loc.48>:
-    {
-        motorpositieR = 0;
      d5a:	10 92 26 02 	sts	0x0226, r1	; 0x800226 <motorpositieR.0+0x1>
      d5e:	10 92 25 02 	sts	0x0225, r1	; 0x800225 <motorpositieR.0>
 
 00000d62 <.L9>:
-    }
-
-    switch(motorpositieL)
      d62:	80 91 23 02 	lds	r24, 0x0223	; 0x800223 <motorpositieL.1>
      d66:	90 91 24 02 	lds	r25, 0x0224	; 0x800224 <motorpositieL.1+0x1>
      d6a:	09 2e       	mov	r0, r25
@@ -2122,9 +2065,6 @@ ISR(TIMER4_OVF_vect){
      d8e:	0c 94 2b 11 	jmp	0x2256	; 0x2256 <__tablejump2__>
 
 00000d92 <.L19>:
-    {
-    case 1:
-        PORTC = 0b00000101;
      d92:	88 e2       	ldi	r24, 0x28	; 40
      d94:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2134,12 +2074,9 @@ ISR(TIMER4_OVF_vect){
      d9a:	20 83       	st	Z, r18
 
 00000d9c <.Loc.52>:
-        break;
      d9c:	2a c0       	rjmp	.+84     	; 0xdf2 <.L10>
 
 00000d9e <.L18>:
-    case 2:
-        PORTC = 0b00000100;
      d9e:	88 e2       	ldi	r24, 0x28	; 40
      da0:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2149,12 +2086,9 @@ ISR(TIMER4_OVF_vect){
      da6:	20 83       	st	Z, r18
 
 00000da8 <.Loc.55>:
-        break;
      da8:	24 c0       	rjmp	.+72     	; 0xdf2 <.L10>
 
 00000daa <.L17>:
-    case 3:
-        PORTC = 0b00010100;
      daa:	88 e2       	ldi	r24, 0x28	; 40
      dac:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2164,12 +2098,9 @@ ISR(TIMER4_OVF_vect){
      db2:	20 83       	st	Z, r18
 
 00000db4 <.Loc.58>:
-        break;
      db4:	1e c0       	rjmp	.+60     	; 0xdf2 <.L10>
 
 00000db6 <.L16>:
-    case 4:
-        PORTC = 0b00010000;
      db6:	88 e2       	ldi	r24, 0x28	; 40
      db8:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2179,12 +2110,9 @@ ISR(TIMER4_OVF_vect){
      dbe:	20 83       	st	Z, r18
 
 00000dc0 <.Loc.61>:
-        break;
      dc0:	18 c0       	rjmp	.+48     	; 0xdf2 <.L10>
 
 00000dc2 <.L15>:
-    case 5:
-        PORTC = 0b01010000;
      dc2:	88 e2       	ldi	r24, 0x28	; 40
      dc4:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2194,12 +2122,9 @@ ISR(TIMER4_OVF_vect){
      dca:	20 83       	st	Z, r18
 
 00000dcc <.Loc.64>:
-        break;
      dcc:	12 c0       	rjmp	.+36     	; 0xdf2 <.L10>
 
 00000dce <.L14>:
-    case 6:
-        PORTC = 0b01000000;
      dce:	88 e2       	ldi	r24, 0x28	; 40
      dd0:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2209,12 +2134,9 @@ ISR(TIMER4_OVF_vect){
      dd6:	20 83       	st	Z, r18
 
 00000dd8 <.Loc.67>:
-        break;
      dd8:	0c c0       	rjmp	.+24     	; 0xdf2 <.L10>
 
 00000dda <.L13>:
-    case 7:
-        PORTC = 0b01000001;
      dda:	88 e2       	ldi	r24, 0x28	; 40
      ddc:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2224,12 +2146,9 @@ ISR(TIMER4_OVF_vect){
      de2:	20 83       	st	Z, r18
 
 00000de4 <.Loc.70>:
-        break;
      de4:	06 c0       	rjmp	.+12     	; 0xdf2 <.L10>
 
 00000de6 <.L11>:
-    case 8:
-        PORTC = 0b00000001;
      de6:	88 e2       	ldi	r24, 0x28	; 40
      de8:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2242,9 +2161,6 @@ ISR(TIMER4_OVF_vect){
 	...
 
 00000df2 <.L10>:
-        break;
-    }
-    switch(motorpositieR)
      df2:	80 91 25 02 	lds	r24, 0x0225	; 0x800225 <motorpositieR.0>
      df6:	90 91 26 02 	lds	r25, 0x0226	; 0x800226 <motorpositieR.0+0x1>
      dfa:	09 2e       	mov	r0, r25
@@ -2270,9 +2186,6 @@ ISR(TIMER4_OVF_vect){
      e1e:	0c 94 2b 11 	jmp	0x2256	; 0x2256 <__tablejump2__>
 
 00000e22 <.L29>:
-    {
-    case 1:
-        PORTA = 0b00001010;
      e22:	82 e2       	ldi	r24, 0x22	; 34
      e24:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2282,12 +2195,9 @@ ISR(TIMER4_OVF_vect){
      e2a:	20 83       	st	Z, r18
 
 00000e2c <.Loc.77>:
-        break;
      e2c:	2a c0       	rjmp	.+84     	; 0xe82 <.L20>
 
 00000e2e <.L28>:
-    case 2:
-        PORTA = 0b00000010;
      e2e:	82 e2       	ldi	r24, 0x22	; 34
      e30:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2297,12 +2207,9 @@ ISR(TIMER4_OVF_vect){
      e36:	20 83       	st	Z, r18
 
 00000e38 <.Loc.80>:
-        break;
      e38:	24 c0       	rjmp	.+72     	; 0xe82 <.L20>
 
 00000e3a <.L27>:
-    case 3:
-        PORTA = 0b10000010;
      e3a:	82 e2       	ldi	r24, 0x22	; 34
      e3c:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2312,12 +2219,9 @@ ISR(TIMER4_OVF_vect){
      e42:	20 83       	st	Z, r18
 
 00000e44 <.Loc.83>:
-        break;
      e44:	1e c0       	rjmp	.+60     	; 0xe82 <.L20>
 
 00000e46 <.L26>:
-    case 4:
-        PORTA = 0b10000000;
      e46:	82 e2       	ldi	r24, 0x22	; 34
      e48:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2327,12 +2231,9 @@ ISR(TIMER4_OVF_vect){
      e4e:	20 83       	st	Z, r18
 
 00000e50 <.Loc.86>:
-        break;
      e50:	18 c0       	rjmp	.+48     	; 0xe82 <.L20>
 
 00000e52 <.L25>:
-    case 5:
-        PORTA = 0b10100000;
      e52:	82 e2       	ldi	r24, 0x22	; 34
      e54:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2342,12 +2243,9 @@ ISR(TIMER4_OVF_vect){
      e5a:	20 83       	st	Z, r18
 
 00000e5c <.Loc.89>:
-        break;
      e5c:	12 c0       	rjmp	.+36     	; 0xe82 <.L20>
 
 00000e5e <.L24>:
-    case 6:
-        PORTA = 0b00100000;
      e5e:	82 e2       	ldi	r24, 0x22	; 34
      e60:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2357,12 +2255,9 @@ ISR(TIMER4_OVF_vect){
      e66:	20 83       	st	Z, r18
 
 00000e68 <.Loc.92>:
-        break;
      e68:	0c c0       	rjmp	.+24     	; 0xe82 <.L20>
 
 00000e6a <.L23>:
-    case 7:
-        PORTA = 0b00101000;
      e6a:	82 e2       	ldi	r24, 0x22	; 34
      e6c:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2372,12 +2267,9 @@ ISR(TIMER4_OVF_vect){
      e72:	20 83       	st	Z, r18
 
 00000e74 <.Loc.95>:
-        break;
      e74:	06 c0       	rjmp	.+12     	; 0xe82 <.L20>
 
 00000e76 <.L21>:
-    case 8:
-        PORTA = 0b00001000;
      e76:	82 e2       	ldi	r24, 0x22	; 34
      e78:	90 e0       	ldi	r25, 0x00	; 0
 
@@ -2390,9 +2282,6 @@ ISR(TIMER4_OVF_vect){
 	...
 
 00000e82 <.L20>:
-        break;
-    }
-}
      e82:	00 00       	nop
      e84:	df 91       	pop	r29
      e86:	cf 91       	pop	r28
@@ -2417,49 +2306,38 @@ ISR(TIMER4_OVF_vect){
      eac:	18 95       	reti
 
 00000eae <PredefinedBocht>:
-
-void PredefinedBocht(void)
-{
      eae:	cf 93       	push	r28
      eb0:	df 93       	push	r29
      eb2:	cd b7       	in	r28, 0x3d	; 61
      eb4:	de b7       	in	r29, 0x3e	; 62
 
 00000eb6 <.Loc.101>:
-    MotorTrackingPositieL = 0;
      eb6:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
      eba:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 00000ebe <.Loc.102>:
-    MotorTrackingPositieR = 0;
      ebe:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
      ec2:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 00000ec6 <.Loc.103>:
-    while(MotorTrackingPositieL < 500*8)
      ec6:	27 c0       	rjmp	.+78     	; 0xf16 <.L32>
 
 00000ec8 <.L35>:
-    {
-        DirectieMotorL = 1;
      ec8:	81 e0       	ldi	r24, 0x01	; 1
      eca:	90 e0       	ldi	r25, 0x00	; 0
      ecc:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
      ed0:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 00000ed4 <.Loc.105>:
-        DirectieMotorR = 1;
      ed4:	81 e0       	ldi	r24, 0x01	; 1
      ed6:	90 e0       	ldi	r25, 0x00	; 0
      ed8:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
      edc:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 00000ee0 <.Loc.106>:
-        obstakeldetectie();
      ee0:	0e 94 fb 04 	call	0x9f6	; 0x9f6 <obstakeldetectie>
 
 00000ee4 <.Loc.107>:
-        if (PORTF && (1<<PF0))
      ee4:	81 e3       	ldi	r24, 0x31	; 49
      ee6:	90 e0       	ldi	r25, 0x00	; 0
      ee8:	fc 01       	movw	r30, r24
@@ -2470,8 +2348,6 @@ void PredefinedBocht(void)
      eee:	51 f0       	breq	.+20     	; 0xf04 <.L33>
 
 00000ef0 <.Loc.109>:
-        {
-            TIMSK4 &= ~(1<<TOIE4);
      ef0:	82 e7       	ldi	r24, 0x72	; 114
      ef2:	90 e0       	ldi	r25, 0x00	; 0
      ef4:	fc 01       	movw	r30, r24
@@ -2488,10 +2364,6 @@ void PredefinedBocht(void)
      f02:	09 c0       	rjmp	.+18     	; 0xf16 <.L32>
 
 00000f04 <.L33>:
-        }
-        else
-        {
-            TIMSK4 |= (1<<TOIE4);
      f04:	82 e7       	ldi	r24, 0x72	; 114
      f06:	90 e0       	ldi	r25, 0x00	; 0
      f08:	fc 01       	movw	r30, r24
@@ -2505,7 +2377,6 @@ void PredefinedBocht(void)
      f14:	20 83       	st	Z, r18
 
 00000f16 <.L32>:
-    while(MotorTrackingPositieL < 500*8)
      f16:	80 91 17 02 	lds	r24, 0x0217	; 0x800217 <MotorTrackingPositieL>
      f1a:	90 91 18 02 	lds	r25, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
      f1e:	8f 39       	cpi	r24, 0x9F	; 159
@@ -2515,42 +2386,32 @@ void PredefinedBocht(void)
      f26:	84 f2       	brlt	.-96     	; 0xec8 <.L35>
 
 00000f28 <.Loc.115>:
-        }
-    }
-    MotorTrackingPositieL = 0;
      f28:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
      f2c:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 00000f30 <.Loc.116>:
-    MotorTrackingPositieR = 0;
      f30:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
      f34:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 00000f38 <.Loc.117>:
-    while(MotorTrackingPositieL < 300*8)
      f38:	27 c0       	rjmp	.+78     	; 0xf88 <.L36>
 
 00000f3a <.L39>:
-    {
-        DirectieMotorL = 1;
      f3a:	81 e0       	ldi	r24, 0x01	; 1
      f3c:	90 e0       	ldi	r25, 0x00	; 0
      f3e:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
      f42:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 00000f46 <.Loc.119>:
-        DirectieMotorR = -1;
      f46:	8f ef       	ldi	r24, 0xFF	; 255
      f48:	9f ef       	ldi	r25, 0xFF	; 255
      f4a:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
      f4e:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 00000f52 <.Loc.120>:
-        obstakeldetectie();
      f52:	0e 94 fb 04 	call	0x9f6	; 0x9f6 <obstakeldetectie>
 
 00000f56 <.Loc.121>:
-        if (PORTF && (1<<PF0))
      f56:	81 e3       	ldi	r24, 0x31	; 49
      f58:	90 e0       	ldi	r25, 0x00	; 0
      f5a:	fc 01       	movw	r30, r24
@@ -2561,8 +2422,6 @@ void PredefinedBocht(void)
      f60:	51 f0       	breq	.+20     	; 0xf76 <.L37>
 
 00000f62 <.Loc.123>:
-        {
-            TIMSK4 &= ~(1<<TOIE4);
      f62:	82 e7       	ldi	r24, 0x72	; 114
      f64:	90 e0       	ldi	r25, 0x00	; 0
      f66:	fc 01       	movw	r30, r24
@@ -2579,10 +2438,6 @@ void PredefinedBocht(void)
      f74:	09 c0       	rjmp	.+18     	; 0xf88 <.L36>
 
 00000f76 <.L37>:
-        }
-        else
-        {
-            TIMSK4 |= (1<<TOIE4);
      f76:	82 e7       	ldi	r24, 0x72	; 114
      f78:	90 e0       	ldi	r25, 0x00	; 0
      f7a:	fc 01       	movw	r30, r24
@@ -2596,7 +2451,6 @@ void PredefinedBocht(void)
      f86:	20 83       	st	Z, r18
 
 00000f88 <.L36>:
-    while(MotorTrackingPositieL < 300*8)
      f88:	80 91 17 02 	lds	r24, 0x0217	; 0x800217 <MotorTrackingPositieL>
      f8c:	90 91 18 02 	lds	r25, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
      f90:	8f 35       	cpi	r24, 0x5F	; 95
@@ -2606,42 +2460,32 @@ void PredefinedBocht(void)
      f98:	84 f2       	brlt	.-96     	; 0xf3a <.L39>
 
 00000f9a <.Loc.129>:
-        }
-    }
-    MotorTrackingPositieL = 0;
      f9a:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
      f9e:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 00000fa2 <.Loc.130>:
-    MotorTrackingPositieR = 0;
      fa2:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
      fa6:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 00000faa <.Loc.131>:
-    while(MotorTrackingPositieL < 1750*8)
      faa:	27 c0       	rjmp	.+78     	; 0xffa <.L40>
 
 00000fac <.L43>:
-    {
-        DirectieMotorL = 1;
      fac:	81 e0       	ldi	r24, 0x01	; 1
      fae:	90 e0       	ldi	r25, 0x00	; 0
      fb0:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
      fb4:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 00000fb8 <.Loc.133>:
-        DirectieMotorR = 1;
      fb8:	81 e0       	ldi	r24, 0x01	; 1
      fba:	90 e0       	ldi	r25, 0x00	; 0
      fbc:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
      fc0:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 00000fc4 <.Loc.134>:
-        obstakeldetectie();
      fc4:	0e 94 fb 04 	call	0x9f6	; 0x9f6 <obstakeldetectie>
 
 00000fc8 <.Loc.135>:
-        if (PORTF && (1<<PF0))
      fc8:	81 e3       	ldi	r24, 0x31	; 49
      fca:	90 e0       	ldi	r25, 0x00	; 0
      fcc:	fc 01       	movw	r30, r24
@@ -2652,8 +2496,6 @@ void PredefinedBocht(void)
      fd2:	51 f0       	breq	.+20     	; 0xfe8 <.L41>
 
 00000fd4 <.Loc.137>:
-        {
-            TIMSK4 &= ~(1<<TOIE4);
      fd4:	82 e7       	ldi	r24, 0x72	; 114
      fd6:	90 e0       	ldi	r25, 0x00	; 0
      fd8:	fc 01       	movw	r30, r24
@@ -2670,10 +2512,6 @@ void PredefinedBocht(void)
      fe6:	09 c0       	rjmp	.+18     	; 0xffa <.L40>
 
 00000fe8 <.L41>:
-        }
-        else
-        {
-            TIMSK4 |= (1<<TOIE4);
      fe8:	82 e7       	ldi	r24, 0x72	; 114
      fea:	90 e0       	ldi	r25, 0x00	; 0
      fec:	fc 01       	movw	r30, r24
@@ -2687,7 +2525,6 @@ void PredefinedBocht(void)
      ff8:	20 83       	st	Z, r18
 
 00000ffa <.L40>:
-    while(MotorTrackingPositieL < 1750*8)
      ffa:	80 91 17 02 	lds	r24, 0x0217	; 0x800217 <MotorTrackingPositieL>
      ffe:	90 91 18 02 	lds	r25, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
     1002:	8f 3a       	cpi	r24, 0xAF	; 175
@@ -2697,42 +2534,32 @@ void PredefinedBocht(void)
     100a:	84 f2       	brlt	.-96     	; 0xfac <.L43>
 
 0000100c <.Loc.143>:
-        }
-    }
-    MotorTrackingPositieL = 0;
     100c:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
     1010:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 00001014 <.Loc.144>:
-    MotorTrackingPositieR = 0;
     1014:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
     1018:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 0000101c <.Loc.145>:
-    while(MotorTrackingPositieL < 300*8)
     101c:	0e c0       	rjmp	.+28     	; 0x103a <.L44>
 
 0000101e <.L45>:
-    {
-        DirectieMotorL = 1;
     101e:	81 e0       	ldi	r24, 0x01	; 1
     1020:	90 e0       	ldi	r25, 0x00	; 0
     1022:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     1026:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 0000102a <.Loc.147>:
-        DirectieMotorR = -1;
     102a:	8f ef       	ldi	r24, 0xFF	; 255
     102c:	9f ef       	ldi	r25, 0xFF	; 255
     102e:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     1032:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 00001036 <.Loc.148>:
-        obstakeldetectie();
     1036:	0e 94 fb 04 	call	0x9f6	; 0x9f6 <obstakeldetectie>
 
 0000103a <.L44>:
-    while(MotorTrackingPositieL < 300*8)
     103a:	80 91 17 02 	lds	r24, 0x0217	; 0x800217 <MotorTrackingPositieL>
     103e:	90 91 18 02 	lds	r25, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
     1042:	8f 35       	cpi	r24, 0x5F	; 95
@@ -2742,31 +2569,24 @@ void PredefinedBocht(void)
     104a:	4c f3       	brlt	.-46     	; 0x101e <.L45>
 
 0000104c <.Loc.150>:
-    }
-        while(MotorTrackingPositieL < 500*8)
     104c:	27 c0       	rjmp	.+78     	; 0x109c <.L46>
 
 0000104e <.L49>:
-    {
-        DirectieMotorL = 1;
     104e:	81 e0       	ldi	r24, 0x01	; 1
     1050:	90 e0       	ldi	r25, 0x00	; 0
     1052:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     1056:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 0000105a <.Loc.152>:
-        DirectieMotorR = 1;
     105a:	81 e0       	ldi	r24, 0x01	; 1
     105c:	90 e0       	ldi	r25, 0x00	; 0
     105e:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     1062:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 00001066 <.Loc.153>:
-        obstakeldetectie();
     1066:	0e 94 fb 04 	call	0x9f6	; 0x9f6 <obstakeldetectie>
 
 0000106a <.Loc.154>:
-        if (PORTF && (1<<PF0))
     106a:	81 e3       	ldi	r24, 0x31	; 49
     106c:	90 e0       	ldi	r25, 0x00	; 0
     106e:	fc 01       	movw	r30, r24
@@ -2777,8 +2597,6 @@ void PredefinedBocht(void)
     1074:	51 f0       	breq	.+20     	; 0x108a <.L47>
 
 00001076 <.Loc.156>:
-        {
-            TIMSK4 &= ~(1<<TOIE4);
     1076:	82 e7       	ldi	r24, 0x72	; 114
     1078:	90 e0       	ldi	r25, 0x00	; 0
     107a:	fc 01       	movw	r30, r24
@@ -2795,10 +2613,6 @@ void PredefinedBocht(void)
     1088:	09 c0       	rjmp	.+18     	; 0x109c <.L46>
 
 0000108a <.L47>:
-        }
-        else
-        {
-            TIMSK4 |= (1<<TOIE4);
     108a:	82 e7       	ldi	r24, 0x72	; 114
     108c:	90 e0       	ldi	r25, 0x00	; 0
     108e:	fc 01       	movw	r30, r24
@@ -2812,7 +2626,6 @@ void PredefinedBocht(void)
     109a:	20 83       	st	Z, r18
 
 0000109c <.L46>:
-        while(MotorTrackingPositieL < 500*8)
     109c:	80 91 17 02 	lds	r24, 0x0217	; 0x800217 <MotorTrackingPositieL>
     10a0:	90 91 18 02 	lds	r25, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
     10a4:	8f 39       	cpi	r24, 0x9F	; 159
@@ -2822,29 +2635,22 @@ void PredefinedBocht(void)
     10ac:	84 f2       	brlt	.-96     	; 0x104e <.L49>
 
 000010ae <.Loc.162>:
-        }
-    }
-    MotorTrackingPositieL = 0;
     10ae:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
     10b2:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 000010b6 <.Loc.163>:
-    MotorTrackingPositieR = 0;
     10b6:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
     10ba:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 000010be <.Loc.164>:
-    DirectieMotorL = 0;
     10be:	10 92 14 02 	sts	0x0214, r1	; 0x800214 <DirectieMotorL+0x1>
     10c2:	10 92 13 02 	sts	0x0213, r1	; 0x800213 <DirectieMotorL>
 
 000010c6 <.Loc.165>:
-    DirectieMotorR = 0;
     10c6:	10 92 16 02 	sts	0x0216, r1	; 0x800216 <DirectieMotorR+0x1>
     10ca:	10 92 15 02 	sts	0x0215, r1	; 0x800215 <DirectieMotorR>
 
 000010ce <.Loc.166>:
-}
     10ce:	00 00       	nop
     10d0:	df 91       	pop	r29
     10d2:	cf 91       	pop	r28
@@ -5161,12 +4967,6 @@ void PredefinedBocht(void)
     1fae:	08 95       	ret
 
 00001fb0 <rijden>:
-#define margeminder 35
-int firstL = 0;
-int firstR = 0;
-
-void rijden(int tv, int ta)    //tv = TOFvoorwaarde
-{                             //ta = TOFachterwaarde
     1fb0:	cf 93       	push	r28
     1fb2:	df 93       	push	r29
     1fb4:	00 d0       	rcall	.+0      	; 0x1fb6 <L0^A>
@@ -5181,7 +4981,6 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     1fc2:	6b 83       	std	Y+3, r22	; 0x03
 
 00001fc4 <.Loc.1>:
-    if(ta > 80)
     1fc4:	8b 81       	ldd	r24, Y+3	; 0x03
     1fc6:	9c 81       	ldd	r25, Y+4	; 0x04
     1fc8:	80 35       	cpi	r24, 0x50	; 80
@@ -5190,17 +4989,10 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     1fce:	1c f0       	brlt	.+6      	; 0x1fd6 <.L2>
 
 00001fd0 <.Loc.2>:
-    {
-        PredefinedBocht();
     1fd0:	0e 94 57 07 	call	0xeae	; 0xeae <PredefinedBocht>
     1fd4:	bc c0       	rjmp	.+376    	; 0x214e <.L3>
 
 00001fd6 <.L2>:
-    }
-
-
-
-    else if((tv > margemeer) && (ta > margemeer)){
     1fd6:	89 81       	ldd	r24, Y+1	; 0x01
     1fd8:	9a 81       	ldd	r25, Y+2	; 0x02
     1fda:	8d 32       	cpi	r24, 0x2D	; 45
@@ -5217,8 +5009,6 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     1fec:	84 f1       	brlt	.+96     	; 0x204e <.L4>
 
 00001fee <.Loc.5>:
-        //motor langzaam rechts
-        if (firstL == 0){
     1fee:	80 91 31 02 	lds	r24, 0x0231	; 0x800231 <firstL>
     1ff2:	90 91 32 02 	lds	r25, 0x0232	; 0x800232 <firstL+0x1>
 
@@ -5227,20 +5017,16 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     1ff8:	51 f4       	brne	.+20     	; 0x200e <.L5>
 
 00001ffa <.Loc.7>:
-            MotorTrackingPositieL = 0;
     1ffa:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
     1ffe:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 00002002 <.Loc.8>:
-            firstL = 1;
     2002:	81 e0       	ldi	r24, 0x01	; 1
     2004:	90 e0       	ldi	r25, 0x00	; 0
     2006:	90 93 32 02 	sts	0x0232, r25	; 0x800232 <firstL+0x1>
     200a:	80 93 31 02 	sts	0x0231, r24	; 0x800231 <firstL>
 
 0000200e <.L5>:
-        }
-        if (MotorTrackingPositieL <4){
     200e:	80 91 17 02 	lds	r24, 0x0217	; 0x800217 <MotorTrackingPositieL>
     2012:	90 91 18 02 	lds	r25, 0x0218	; 0x800218 <MotorTrackingPositieL+0x1>
 
@@ -5253,46 +5039,34 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     201c:	5c f4       	brge	.+22     	; 0x2034 <.L6>
 
 0000201e <.Loc.11>:
-        DirectieMotorL = 1;
     201e:	81 e0       	ldi	r24, 0x01	; 1
     2020:	90 e0       	ldi	r25, 0x00	; 0
     2022:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     2026:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 0000202a <.Loc.12>:
-        DirectieMotorR = 0;
     202a:	10 92 16 02 	sts	0x0216, r1	; 0x800216 <DirectieMotorR+0x1>
     202e:	10 92 15 02 	sts	0x0215, r1	; 0x800215 <DirectieMotorR>
 
 00002032 <.Loc.13>:
-        if (MotorTrackingPositieL <4){
     2032:	8d c0       	rjmp	.+282    	; 0x214e <.L3>
 
 00002034 <.L6>:
-        }
-        else {
-            DirectieMotorL = 1;
     2034:	81 e0       	ldi	r24, 0x01	; 1
     2036:	90 e0       	ldi	r25, 0x00	; 0
     2038:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     203c:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 00002040 <.Loc.15>:
-            DirectieMotorR = 1;
     2040:	81 e0       	ldi	r24, 0x01	; 1
     2042:	90 e0       	ldi	r25, 0x00	; 0
     2044:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     2048:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 0000204c <.Loc.16>:
-        if (MotorTrackingPositieL <4){
     204c:	80 c0       	rjmp	.+256    	; 0x214e <.L3>
 
 0000204e <.L4>:
-        }
-    }
-
-    else if(tv < margeminder && ta < margeminder){
     204e:	89 81       	ldd	r24, Y+1	; 0x01
     2050:	9a 81       	ldd	r25, Y+2	; 0x02
     2052:	82 32       	cpi	r24, 0x22	; 34
@@ -5313,8 +5087,6 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     2064:	84 f5       	brge	.+96     	; 0x20c6 <.L8>
 
 00002066 <.Loc.19>:
-        //motor langzaam links
-        if (firstR == 0){
     2066:	80 91 33 02 	lds	r24, 0x0233	; 0x800233 <firstR>
     206a:	90 91 34 02 	lds	r25, 0x0234	; 0x800234 <firstR+0x1>
 
@@ -5323,20 +5095,16 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     2070:	51 f4       	brne	.+20     	; 0x2086 <.L9>
 
 00002072 <.Loc.21>:
-            MotorTrackingPositieR = 0;
     2072:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
     2076:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 0000207a <.Loc.22>:
-            firstR = 1;
     207a:	81 e0       	ldi	r24, 0x01	; 1
     207c:	90 e0       	ldi	r25, 0x00	; 0
     207e:	90 93 34 02 	sts	0x0234, r25	; 0x800234 <firstR+0x1>
     2082:	80 93 33 02 	sts	0x0233, r24	; 0x800233 <firstR>
 
 00002086 <.L9>:
-        }
-        if (MotorTrackingPositieR <4){
     2086:	80 91 19 02 	lds	r24, 0x0219	; 0x800219 <MotorTrackingPositieR>
     208a:	90 91 1a 02 	lds	r25, 0x021A	; 0x80021a <MotorTrackingPositieR+0x1>
 
@@ -5349,46 +5117,34 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     2094:	5c f4       	brge	.+22     	; 0x20ac <.L10>
 
 00002096 <.Loc.25>:
-        DirectieMotorL = 0;
     2096:	10 92 14 02 	sts	0x0214, r1	; 0x800214 <DirectieMotorL+0x1>
     209a:	10 92 13 02 	sts	0x0213, r1	; 0x800213 <DirectieMotorL>
 
 0000209e <.Loc.26>:
-        DirectieMotorR = 1;
     209e:	81 e0       	ldi	r24, 0x01	; 1
     20a0:	90 e0       	ldi	r25, 0x00	; 0
     20a2:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     20a6:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 000020aa <.Loc.27>:
-        if (MotorTrackingPositieR <4){
     20aa:	51 c0       	rjmp	.+162    	; 0x214e <.L3>
 
 000020ac <.L10>:
-        }
-        else {
-            DirectieMotorL = 1;
     20ac:	81 e0       	ldi	r24, 0x01	; 1
     20ae:	90 e0       	ldi	r25, 0x00	; 0
     20b0:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     20b4:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 000020b8 <.Loc.29>:
-            DirectieMotorR = 1;
     20b8:	81 e0       	ldi	r24, 0x01	; 1
     20ba:	90 e0       	ldi	r25, 0x00	; 0
     20bc:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     20c0:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 000020c4 <.Loc.30>:
-        if (MotorTrackingPositieR <4){
     20c4:	44 c0       	rjmp	.+136    	; 0x214e <.L3>
 
 000020c6 <.L8>:
-        }
-    }
-
-    else if(tv == ta){
     20c6:	29 81       	ldd	r18, Y+1	; 0x01
     20c8:	3a 81       	ldd	r19, Y+2	; 0x02
     20ca:	8b 81       	ldd	r24, Y+3	; 0x03
@@ -5398,15 +5154,12 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     20d2:	69 f4       	brne	.+26     	; 0x20ee <.L12>
 
 000020d4 <.Loc.32>:
-        //rechtdoorrijden
-        DirectieMotorL = 1;
     20d4:	81 e0       	ldi	r24, 0x01	; 1
     20d6:	90 e0       	ldi	r25, 0x00	; 0
     20d8:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     20dc:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 000020e0 <.Loc.33>:
-        DirectieMotorR = 1;
     20e0:	81 e0       	ldi	r24, 0x01	; 1
     20e2:	90 e0       	ldi	r25, 0x00	; 0
     20e4:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
@@ -5414,8 +5167,6 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     20ec:	30 c0       	rjmp	.+96     	; 0x214e <.L3>
 
 000020ee <.L12>:
-    }
-    else if(tv > ta){
     20ee:	29 81       	ldd	r18, Y+1	; 0x01
     20f0:	3a 81       	ldd	r19, Y+2	; 0x02
     20f2:	8b 81       	ldd	r24, Y+3	; 0x03
@@ -5426,7 +5177,6 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     20fc:	8c f0       	brlt	.+34     	; 0x2120 <.L13>
 
 000020fe <.Loc.35>:
-        if(tv >= afstandmuur){
     20fe:	89 81       	ldd	r24, Y+1	; 0x01
     2100:	9a 81       	ldd	r25, Y+2	; 0x02
     2102:	87 32       	cpi	r24, 0x27	; 39
@@ -5435,23 +5185,17 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     2108:	14 f1       	brlt	.+68     	; 0x214e <.L3>
 
 0000210a <.Loc.36>:
-            //motorheel rechts
-            DirectieMotorL = 1;
     210a:	81 e0       	ldi	r24, 0x01	; 1
     210c:	90 e0       	ldi	r25, 0x00	; 0
     210e:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     2112:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 00002116 <.Loc.37>:
-            DirectieMotorR = 0;
     2116:	10 92 16 02 	sts	0x0216, r1	; 0x800216 <DirectieMotorR+0x1>
     211a:	10 92 15 02 	sts	0x0215, r1	; 0x800215 <DirectieMotorR>
     211e:	17 c0       	rjmp	.+46     	; 0x214e <.L3>
 
 00002120 <.L13>:
-        }
-    }
-    else if(tv < ta){
     2120:	29 81       	ldd	r18, Y+1	; 0x01
     2122:	3a 81       	ldd	r19, Y+2	; 0x02
     2124:	8b 81       	ldd	r24, Y+3	; 0x03
@@ -5461,7 +5205,6 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     212c:	84 f4       	brge	.+32     	; 0x214e <.L3>
 
 0000212e <.Loc.39>:
-        if(tv < afstandmuur){
     212e:	89 81       	ldd	r24, Y+1	; 0x01
     2130:	9a 81       	ldd	r25, Y+2	; 0x02
     2132:	87 32       	cpi	r24, 0x27	; 39
@@ -5472,23 +5215,16 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     2138:	54 f4       	brge	.+20     	; 0x214e <.L3>
 
 0000213a <.Loc.40>:
-            //motor veel links
-            DirectieMotorL = 0;
     213a:	10 92 14 02 	sts	0x0214, r1	; 0x800214 <DirectieMotorL+0x1>
     213e:	10 92 13 02 	sts	0x0213, r1	; 0x800213 <DirectieMotorL>
 
 00002142 <.Loc.41>:
-            DirectieMotorR = 1;
     2142:	81 e0       	ldi	r24, 0x01	; 1
     2144:	90 e0       	ldi	r25, 0x00	; 0
     2146:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     214a:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 0000214e <.L3>:
-        }
-    }
-
-    if (!(tv > margemeer && ta > margemeer)){
     214e:	89 81       	ldd	r24, Y+1	; 0x01
     2150:	9a 81       	ldd	r25, Y+2	; 0x02
     2152:	8d 32       	cpi	r24, 0x2D	; 45
@@ -5507,19 +5243,14 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     2164:	44 f4       	brge	.+16     	; 0x2176 <.L15>
 
 00002166 <.L14>:
-        MotorTrackingPositieL = 0;
     2166:	10 92 18 02 	sts	0x0218, r1	; 0x800218 <MotorTrackingPositieL+0x1>
     216a:	10 92 17 02 	sts	0x0217, r1	; 0x800217 <MotorTrackingPositieL>
 
 0000216e <.Loc.45>:
-        firstL = 0;
     216e:	10 92 32 02 	sts	0x0232, r1	; 0x800232 <firstL+0x1>
     2172:	10 92 31 02 	sts	0x0231, r1	; 0x800231 <firstL>
 
 00002176 <.L15>:
-    }
-
-    if (!(tv < margeminder && ta < margeminder)){
     2176:	89 81       	ldd	r24, Y+1	; 0x01
     2178:	9a 81       	ldd	r25, Y+2	; 0x02
     217a:	82 32       	cpi	r24, 0x22	; 34
@@ -5538,18 +5269,14 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     218c:	44 f0       	brlt	.+16     	; 0x219e <.L18>
 
 0000218e <.L16>:
-        MotorTrackingPositieR = 0;
     218e:	10 92 1a 02 	sts	0x021A, r1	; 0x80021a <MotorTrackingPositieR+0x1>
     2192:	10 92 19 02 	sts	0x0219, r1	; 0x800219 <MotorTrackingPositieR>
 
 00002196 <.Loc.49>:
-        firstR = 0;
     2196:	10 92 34 02 	sts	0x0234, r1	; 0x800234 <firstR+0x1>
     219a:	10 92 33 02 	sts	0x0233, r1	; 0x800233 <firstR>
 
 0000219e <.L18>:
-    }
-}
     219e:	00 00       	nop
     21a0:	0f 90       	pop	r0
     21a2:	0f 90       	pop	r0
@@ -5560,29 +5287,24 @@ void rijden(int tv, int ta)    //tv = TOFvoorwaarde
     21ac:	08 95       	ret
 
 000021ae <blind_rijden>:
-
-void blind_rijden (void){
     21ae:	cf 93       	push	r28
     21b0:	df 93       	push	r29
     21b2:	cd b7       	in	r28, 0x3d	; 61
     21b4:	de b7       	in	r29, 0x3e	; 62
 
 000021b6 <.Loc.52>:
-    DirectieMotorL = 1;
     21b6:	81 e0       	ldi	r24, 0x01	; 1
     21b8:	90 e0       	ldi	r25, 0x00	; 0
     21ba:	90 93 14 02 	sts	0x0214, r25	; 0x800214 <DirectieMotorL+0x1>
     21be:	80 93 13 02 	sts	0x0213, r24	; 0x800213 <DirectieMotorL>
 
 000021c2 <.Loc.53>:
-    DirectieMotorR = 1;
     21c2:	81 e0       	ldi	r24, 0x01	; 1
     21c4:	90 e0       	ldi	r25, 0x00	; 0
     21c6:	90 93 16 02 	sts	0x0216, r25	; 0x800216 <DirectieMotorR+0x1>
     21ca:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 000021ce <.Loc.54>:
-}
     21ce:	00 00       	nop
     21d0:	df 91       	pop	r29
     21d2:	cf 91       	pop	r28
@@ -5627,7 +5349,8 @@ int main(void)
     21fe:	80 93 15 02 	sts	0x0215, r24	; 0x800215 <DirectieMotorR>
 
 00002202 <.L4>:
-    //PredefinedBocht();
+    //esmeE WAS HIer niet
+    //hallo, ik ben jarig
 
     while(1)
     {
