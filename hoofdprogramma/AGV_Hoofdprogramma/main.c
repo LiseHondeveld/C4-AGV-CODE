@@ -19,7 +19,8 @@ int main(void)
     DirectieMotorR = 1;
     //PredefinedBocht();
 
-    //test test
+    //test
+    //esmeE WAS HIer
 
     while(1)
     {
