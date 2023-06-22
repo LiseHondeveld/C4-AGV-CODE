@@ -16,7 +16,7 @@ void agv_motor_init()
     TCCR4A = 0;
     TCCR4B = 0;
     TCNT4 = 6;
-    TCCR4A |= (1 << WGM01);
+    TCCR4A |= (1 << WGM41);
     TCCR4B |= (1 << CS41) | (1 << CS40);//prescaler 64
     TIMSK4 |= (1 << TOIE4);
     sei();
@@ -119,7 +119,7 @@ void PredefinedBocht(void)
 {
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
-    while(MotorTrackingPositieL < 528*8)
+    while(MotorTrackingPositieL < 500*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = 1;
@@ -135,7 +135,7 @@ void PredefinedBocht(void)
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
-    while(MotorTrackingPositieL < 1000*8)
+    while(MotorTrackingPositieL < 1750*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = 1;
@@ -149,7 +149,7 @@ void PredefinedBocht(void)
         DirectieMotorR = -1;
         obstakeldetectie();
     }
-        while(MotorTrackingPositieL < 828*8)
+        while(MotorTrackingPositieL < 500*8)
     {
         DirectieMotorL = 1;
         DirectieMotorR = 1;
