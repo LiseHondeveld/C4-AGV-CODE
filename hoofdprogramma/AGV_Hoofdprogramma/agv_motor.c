@@ -124,6 +124,14 @@ void PredefinedBocht(void)
         DirectieMotorL = 1;
         DirectieMotorR = 1;
         obstakeldetectie();
+        if (PORTF && (1<<PF0))
+        {
+            TIMSK4 &= ~(1<<TOIE4);
+        }
+        else
+        {
+            TIMSK4 |= (1<<TOIE4);
+        }
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
@@ -132,6 +140,14 @@ void PredefinedBocht(void)
         DirectieMotorL = 1;
         DirectieMotorR = -1;
         obstakeldetectie();
+        if (PORTF && (1<<PF0))
+        {
+            TIMSK4 &= ~(1<<TOIE4);
+        }
+        else
+        {
+            TIMSK4 |= (1<<TOIE4);
+        }
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
@@ -140,6 +156,14 @@ void PredefinedBocht(void)
         DirectieMotorL = 1;
         DirectieMotorR = 1;
         obstakeldetectie();
+        if (PORTF && (1<<PF0))
+        {
+            TIMSK4 &= ~(1<<TOIE4);
+        }
+        else
+        {
+            TIMSK4 |= (1<<TOIE4);
+        }
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;
@@ -154,6 +178,14 @@ void PredefinedBocht(void)
         DirectieMotorL = 1;
         DirectieMotorR = 1;
         obstakeldetectie();
+        if (PORTF && (1<<PF0))
+        {
+            TIMSK4 &= ~(1<<TOIE4);
+        }
+        else
+        {
+            TIMSK4 |= (1<<TOIE4);
+        }
     }
     MotorTrackingPositieL = 0;
     MotorTrackingPositieR = 0;

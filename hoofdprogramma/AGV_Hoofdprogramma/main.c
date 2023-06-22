@@ -11,20 +11,28 @@
 
 int main(void)
 {
-   agv_buzzer_init();
-   agv_ultrasoon_init();
-   agv_motor_init();
-   DirectieMotorL = 1;
-   DirectieMotorR = 1;
-   //PredefinedBocht();
-
-   while(1){
-
-    boomdetectie();
+    agv_buzzer_init();
+    agv_ultrasoon_init();
+    agv_motor_init();
     DirectieMotorL = 1;
     DirectieMotorR = 1;
-    obstakeldetectie();
+    //PredefinedBocht();
 
-   }
+    while(1)
+    {
+
+        boomdetectie();
+        DirectieMotorL = 1;
+        DirectieMotorR = 1;
+        obstakeldetectie();
+        if (PORTF && (1<<PF0))
+        {
+            TIMSK4 &= ~(1<<TOIE4);
+        }
+        else
+        {
+            TIMSK4 |= (1<<TOIE4);
+        }
+    }
 
 }
