@@ -178,3 +178,64 @@
 
 1687351371 c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.h
 
+1687420023 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.c
+	<avr/io.h>
+	<avr/delay.h>
+	"agv_ultrasoon.h"
+	"agv_motor.h"
+
+1687416310 c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.h
+
+1687416310 c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.h
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.c
+	<avr/io.h>
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
+	"general_i2c.h"
+
+1687416310 c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.h
+
+1687420156 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.c
+	<avr/io.h>
+	<avr/interrupt.h>
+	<util/delay.h>
+
+1687418116 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.c
+	<avr/io.h>
+
+1687416310 c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.h
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.c
+	<avr/interrupt.h>
+	<avr/io.h>
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
+	<avr/io.h>
+	<avr/delay.h>
+	"agv_ultrasoon.h"
+	"agv_motor.h"
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\fuse.c
+	<avr/io.h>
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.c
+	"general_i2c.h"
+	<avr/io.h>
+
+1687416310 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.c
+	<avr/io.h>
+	"agv_motor.h"
+
+1687418591 source:c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
+	<avr/io.h>
+	"agv_boomdetectie.h"
+	<util/delay.h>
+	"agv_ultrasoon.h"
+	"agv_buzzer.h"
+	"agv_motor.h"
+
+1687416310 c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.h
+
+1687416310 c:\users\sande\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.h
+
