@@ -19,6 +19,8 @@ int main(void)
     DirectieMotorR = 1;
     //PredefinedBocht();
 
+    //test test
+
     while(1)
     {
         boomdetectie();
