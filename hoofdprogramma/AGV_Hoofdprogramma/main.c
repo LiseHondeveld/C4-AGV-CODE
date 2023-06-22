@@ -23,6 +23,7 @@ int main(void)
     //esmeE WAS HIer niet
     //hallo, ik ben jarig
     //Bassie zit naast me.
+    //Sander naast mij...
 
     while(1)
     {
