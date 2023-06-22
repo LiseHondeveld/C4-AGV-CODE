@@ -53,6 +53,7 @@
 		<Unit filename="Hoe_rijden.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Hoe_rijden.h" />
 		<Unit filename="agv_boomdetectie.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -69,6 +70,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="agv_motor.h" />
+		<Unit filename="agv_schakelaar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="agv_schakelaar.h" />
 		<Unit filename="agv_tof.c">
 			<Option compilerVar="CC" />
 		</Unit>
