@@ -40,8 +40,13 @@
 	<avr/io.h>
 	"agv_motor.h"
 
-1687251300 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
+1687384895 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\main.c
 	<avr/io.h>
+	"agv_boomdetectie.h"
+	<util/delay.h>
+	"agv_ultrasoon.h"
+	"agv_buzzer.h"
+	"agv_motor.h"
 
 1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_volgmodus.c
 	<avr/io.h>
@@ -144,10 +149,11 @@
 	<avr/io.h>
 	<util/delay.h>
 
-1687353266 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
-	"general_i2c.h"
+1687423629 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.c
+	"avr/io.h"
 
-1687268030 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.h
+1687425079 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.h
+	<avr/io.h>
 
 1687251300 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_ultrasoon.h
 
@@ -164,10 +170,11 @@
 
 1687268030 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_tof.h
 
-1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.c
+1687425079 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\general_i2c.c
+	"general_i2c.h"
 	<avr/io.h>
 
-1687384754 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.c
+1687422231 source:c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_motor.c
 	<avr/io.h>
 	<avr/interrupt.h>
 	<util/delay.h>
@@ -177,4 +184,8 @@
 1687339914 c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_display.h
 
 1687351371 c:\users\semva\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\hoe_rijden.h
+
+1687338760 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_boomdetectie.h
+
+1687384754 c:\users\lise hondeveld\documents\github\c4-agv-code\hoofdprogramma\agv_hoofdprogramma\agv_buzzer.h
 

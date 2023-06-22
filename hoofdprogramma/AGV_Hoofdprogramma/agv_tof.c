@@ -1,4 +1,7 @@
 #include "agv_tof.h"
+#include "general_i2c.h"
+#include <avr/io.h>
+#include <stdbool.h>
 
 #define REG_IDENTIFICATION_MODEL_ID (0xC0)
 #define REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV (0x89)
@@ -16,7 +19,6 @@
 #define REG_GLOBAL_CONFIG_SPAD_ENABLES_REF_0 (0xB0)
 #define REG_RESULT_RANGE_STATUS (0x14)
 
-
 #define TOF_DEFAULT_ADDR
 #define TOF1_ADDR
 #define TOF2_ADDR
@@ -31,33 +33,49 @@
 #define TOF2_SHUT_BANK
 #define TOF2_SHUT_PIN
 
-static uint8_t tof1_stop_variable = 0;
-static uint8_t tof2_stop_variable = 0;
+#define VL53L0X_EXPECTED_DEVICE_ID (0xEE)
+
+/**
+ * We can read the model id to confirm that the device is booted.
+ * (There is no fresh_out_of_reset as on the vl6180x)
+ */
+uint8_t device_is_booted(uint8_t addr8)
+{
+    uint8_t device_id = 0;
+    if (!i2c_read_addr8_register8_pointer8(addr8, REG_IDENTIFICATION_MODEL_ID, &device_id)) {
+        return 1;
+    }
+    return device_id == VL53L0X_EXPECTED_DEVICE_ID;
+}
+
+#define REG_SLAVE_DEVICE_ADDRESS (0x8A)
+
+static uint8_t configure_address(uint8_t addr8, uint8_t newaddr8)
+{
+    /* 7-bit address */
+    return i2c_write_addr8_register8_data8(addr8, REG_SLAVE_DEVICE_ADDRESS, newaddr8 & 0x7F);
+}
 
 /**
  * One time device initialization
  */
 
-uint8_t tof_init_addr8(uint8_t addr8)
+
+
+static uint8_t stop_variable = 0;
+
+uint8_t tof_data_init(uint8_t addr8)
 {
-    if(!load_default_tuning_settings())
-        return 1;
-    if(!configure_interrupt())
-        return 1;
-    if(!set_sequence_steps_enabledRange(RANGE_SEQUENCE_STEP_DSS, RANGE_SEQUENCE_STEP_PRE_RANGE, RANGE_SEQUENCE_STEP_FINAL_RANGE))
-}
-uint8_t tof_data_init(uint8_t addr8, uint8_t &stop_variable)
-{
-        bool success = false;
+        uint8_t success = 0;
 
     /* Set 2v8 mode */
     uint8_t vhv_config_scl_sda = 0;
     if (!i2c_read_addr8_register8_pointer8(addr8, REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV, &vhv_config_scl_sda)) {
-        return false;
+        return 0;
     }
     vhv_config_scl_sda |= 0x01;
     if (!i2c_write_addr8_register8_data8(addr8, REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV, vhv_config_scl_sda)) {
-        return false;
+        return 0;
     }
 
     /* Set I2C standard mode */
@@ -77,9 +95,9 @@ uint8_t tof_data_init(uint8_t addr8, uint8_t &stop_variable)
 /**
  * Load tuning settings (same as default tuning settings provided by ST api code)
  */
-static bool load_default_tuning_settings(uint8_t addr8)
+uint8_t load_default_tuning_settings(uint8_t addr8)
 {
-    bool success = i2c_write_addr8_pointer8_data8(addr8, 0xFF, 0x01);
+    uint8_t success = i2c_write_addr8_register8_data8(addr8, 0xFF, 0x01);
     success &= i2c_write_addr8_pointer8_data8(addr8, 0x00, 0x00);
     success &= i2c_write_addr8_pointer8_data8(addr8, 0xFF, 0x00);
     success &= i2c_write_addr8_pointer8_data8(addr8, 0x09, 0x00);
@@ -163,27 +181,27 @@ static bool load_default_tuning_settings(uint8_t addr8)
     return success;
 }
 
-static bool configure_interrupt(uint8_t addr8)
+uint8_t configure_interrupt(uint8_t addr8)
 {
     /* Interrupt on new sample ready */
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_SYSTEM_INTERRUPT_CONFIG_GPIO, 0x04)) {
-        return false;
+        return 0;
     }
 
     /* Configure active low since the pin is pulled-up on most breakout boards */
     uint8_t gpio_hv_mux_active_high = 0;
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_GPIO_HV_MUX_ACTIVE_HIGH, &gpio_hv_mux_active_high)) {
-        return false;
+        return 0;
     }
     gpio_hv_mux_active_high &= ~0x10;
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_GPIO_HV_MUX_ACTIVE_HIGH, gpio_hv_mux_active_high)) {
-        return false;
+        return 0;
     }
 
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_SYSTEM_INTERRUPT_CLEAR, 0x01)) {
-        return false;
+        return 0;
     }
-    return true;
+    return 1;
 }
 
 #define RANGE_SEQUENCE_STEP_TCC (0x10) /* Target CentreCheck */
@@ -195,20 +213,22 @@ static bool configure_interrupt(uint8_t addr8)
 /**
  * Enable (or disable) specific steps in the sequence
  */
-static bool set_sequence_steps_enabled(uint8_t addr8, uint8_t sequence_step)
+uint8_t set_sequence_steps_enabled(uint8_t addr8, uint8_t sequence_step)
 {
     return i2c_write_addr8_pointer8_data8(addr8, REG_SYSTEM_SEQUENCE_CONFIG, sequence_step);
 }
 
 
 //vanaf hier temp
-typedef enum
+typedef enum //calibration_type
 {
     CALIBRATION_TYPE_VHV,
     CALIBRATION_TYPE_PHASE
 } calibration_type_t;
 
-static bool perform_single_ref_calibration(addr8, calibration_type_t calib_type)
+//typedef enum calibration_type calibration_type_t;
+
+uint8_t perform_single_ref_calibration(uint8_t addr8, calibration_type_t calib_type)
 {
     uint8_t sysrange_start = 0;
     uint8_t sequence_config = 0;
@@ -269,12 +289,29 @@ static bool perform_ref_calibration(uint8_t addr8)
     return true;
 }
 
+#define RANGE_SEQUENCE_STEP_TCC (0x10) /* Target CentreCheck */
+#define RANGE_SEQUENCE_STEP_MSRC (0x04) /* Minimum Signal Rate Check */
+#define RANGE_SEQUENCE_STEP_DSS (0x28) /* Dynamic SPAD selection */
+#define RANGE_SEQUENCE_STEP_PRE_RANGE (0x40)
+#define RANGE_SEQUENCE_STEP_FINAL_RANGE (0x80)
+
+uint8_t tof_init_addr8(uint8_t addr8)
+{
+    if(!load_default_tuning_settings(addr8))
+        return 1;
+    if(!configure_interrupt(addr8))
+        return 1;
+    if(!set_sequence_steps_enabledRange(RANGE_SEQUENCE_STEP_DSS, RANGE_SEQUENCE_STEP_PRE_RANGE, RANGE_SEQUENCE_STEP_FINAL_RANGE))
+        return 1;
+    return 0;
+}
+
 bool vl53l0x_init(uint8_t addr8)
 {
-    if (!device_is_booted()) {
+    if (!device_is_booted(addr8)) {
         return false;
     }
-    if (!data_init(add8)) {
+    if (!data_init(addr8)) {
         return false;
     }
     if (!static_init(addr8)) {
@@ -285,3 +322,4 @@ bool vl53l0x_init(uint8_t addr8)
     }
     return true;
 }
+
