@@ -1,4 +1,4 @@
-#include "agv_tof.h"
+/*#include "agv_tof.h"
 
 #define REG_IDENTIFICATION_MODEL_ID (0xC0)
 #define REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV (0x89)
@@ -36,7 +36,7 @@ static uint8_t tof2_stop_variable = 0;
 
 /**
  * One time device initialization
- */
+ *//*
 
 uint8_t tof_init_addr8(uint8_t addr8)
 {
@@ -50,7 +50,7 @@ uint8_t tof_data_init(uint8_t addr8, uint8_t &stop_variable)
 {
         bool success = false;
 
-    /* Set 2v8 mode */
+    /* Set 2v8 mode *//*
     uint8_t vhv_config_scl_sda = 0;
     if (!i2c_read_addr8_register8_pointer8(addr8, REG_VHV_CONFIG_PAD_SCL_SDA_EXTSUP_HV, &vhv_config_scl_sda)) {
         return false;
@@ -60,7 +60,7 @@ uint8_t tof_data_init(uint8_t addr8, uint8_t &stop_variable)
         return false;
     }
 
-    /* Set I2C standard mode */
+    /* Set I2C standard mode *//*
     success = i2c_write_addr8_register8_data8(addr8, 0x88, 0x00);
 
     success &= i2c_write_addr8_register8_data8(addr8, 0x80, 0x01);
@@ -76,7 +76,7 @@ uint8_t tof_data_init(uint8_t addr8, uint8_t &stop_variable)
 
 /**
  * Load tuning settings (same as default tuning settings provided by ST api code)
- */
+ *//*
 static bool load_default_tuning_settings(uint8_t addr8)
 {
     bool success = i2c_write_addr8_pointer8_data8(addr8, 0xFF, 0x01);
@@ -165,12 +165,12 @@ static bool load_default_tuning_settings(uint8_t addr8)
 
 static bool configure_interrupt(uint8_t addr8)
 {
-    /* Interrupt on new sample ready */
+    /* Interrupt on new sample ready *//*$
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_SYSTEM_INTERRUPT_CONFIG_GPIO, 0x04)) {
         return false;
     }
 
-    /* Configure active low since the pin is pulled-up on most breakout boards */
+    /* Configure active low since the pin is pulled-up on most breakout boards *//*
     uint8_t gpio_hv_mux_active_high = 0;
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_GPIO_HV_MUX_ACTIVE_HIGH, &gpio_hv_mux_active_high)) {
         return false;
@@ -186,15 +186,15 @@ static bool configure_interrupt(uint8_t addr8)
     return true;
 }
 
-#define RANGE_SEQUENCE_STEP_TCC (0x10) /* Target CentreCheck */
-#define RANGE_SEQUENCE_STEP_MSRC (0x04) /* Minimum Signal Rate Check */
-#define RANGE_SEQUENCE_STEP_DSS (0x28) /* Dynamic SPAD selection */
-#define RANGE_SEQUENCE_STEP_PRE_RANGE (0x40)
-#define RANGE_SEQUENCE_STEP_FINAL_RANGE (0x80)
+//#define RANGE_SEQUENCE_STEP_TCC (0x10) /* Target CentreCheck */
+//#define RANGE_SEQUENCE_STEP_MSRC (0x04) /* Minimum Signal Rate Check */
+//#define RANGE_SEQUENCE_STEP_DSS (0x28) /* Dynamic SPAD selection */
+//#define RANGE_SEQUENCE_STEP_PRE_RANGE (0x40)
+//#define RANGE_SEQUENCE_STEP_FINAL_RANGE (0x80)
 
 /**
  * Enable (or disable) specific steps in the sequence
- */
+ *//*
 static bool set_sequence_steps_enabled(uint8_t addr8, uint8_t sequence_step)
 {
     return i2c_write_addr8_pointer8_data8(addr8, REG_SYSTEM_SEQUENCE_CONFIG, sequence_step);
@@ -229,7 +229,7 @@ static bool perform_single_ref_calibration(addr8, calibration_type_t calib_type)
     if (!i2c_write_addr8_pointer8_data8(addr8, REG_SYSRANGE_START, sysrange_start)) {
         return false;
     }
-    /* Wait for interrupt */
+    /* Wait for interrupt *//*
     uint8_t interrupt_status = 0;
     bool success = false;
     do {
@@ -251,7 +251,7 @@ static bool perform_single_ref_calibration(addr8, calibration_type_t calib_type)
 /**
  * Temperature calibration needs to be run again if the temperature changes by
  * more than 8 degrees according to the datasheet.
- */
+ *//*
 static bool perform_ref_calibration(uint8_t addr8)
 {
     if (!perform_single_ref_calibration(addr8, CALIBRATION_TYPE_VHV)) {
@@ -260,7 +260,7 @@ static bool perform_ref_calibration(uint8_t addr8)
     if (!perform_single_ref_calibration(addr8, CALIBRATION_TYPE_PHASE)) {
         return false;
     }
-    /* Restore sequence steps enabled */
+    /* Restore sequence steps enabled *//*
     if (!set_sequence_steps_enabled(addr8, RANGE_SEQUENCE_STEP_DSS +
                                     RANGE_SEQUENCE_STEP_PRE_RANGE +
                                     RANGE_SEQUENCE_STEP_FINAL_RANGE)) {
@@ -285,3 +285,4 @@ bool vl53l0x_init(uint8_t addr8)
     }
     return true;
 }
+*/

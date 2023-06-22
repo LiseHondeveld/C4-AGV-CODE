@@ -7,6 +7,7 @@
 #include "agv_ultrasoon.h"
 #include "agv_buzzer.h"
 #include "agv_motor.h"
+//#include "agv_schakelaar.h"
 
 
 int main(void)
@@ -20,7 +21,6 @@ int main(void)
 
     while(1)
     {
-
         boomdetectie();
         DirectieMotorL = 1;
         DirectieMotorR = 1;
