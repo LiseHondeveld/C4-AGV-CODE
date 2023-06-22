@@ -22,6 +22,7 @@ int main(void)
     //test
     //esmeE WAS HIer niet
     //hallo, ik ben jarig
+    //Bassie zit naast me.
 
     while(1)
     {
