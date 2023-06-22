@@ -25,14 +25,6 @@ int main(void)
         DirectieMotorL = 1;
         DirectieMotorR = 1;
         obstakeldetectie();
-        if (PORTF && (1<<PF0))
-        {
-            TIMSK4 &= ~(1<<TOIE4);
-        }
-        else
-        {
-            TIMSK4 |= (1<<TOIE4);
-        }
     }
 
 }
